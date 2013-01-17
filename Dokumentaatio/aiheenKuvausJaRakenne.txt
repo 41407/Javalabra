@@ -1,0 +1,18 @@
+Aihe: Tasohyppelypeli
+Toteutetaan graafinen peli, jossa pelaaja ohjaa hahmoa ruudun vasemmalta laidalta oikealle väistellen kuiluja ja örkkejä.
+
+Ohjelman suorituksen alussa pelaaja voi päättää aloittaako pelin alusta vai jatkaako aiemmin tallennettua peliä.
+
+Pelaajan aloitettua peli, peli lataa tason tiedostosta.
+
+Pelaajan suoritusta arvioidaan pelaajan kunkin tason läpäisyyn käyttämän ajan perusteella. USP: jos pelaaja putoaa rotkoon, peli ei keskeydy vaan rotkon pohjalla pelaaja huomaa joutuneensa tason alkupisteeseen. Tämä siksi että pelikokemus olisi mahdollisimman smooooth. Lisäksi ko. mekaniikka opettaa pelaajan jokseenkin luontevasti selviytymään hankalista kohdista.
+
+Tason lopussa peli tallentaa automaattisesti tilanteen tiedostoon.
+
+Käyttäjät: Pelaaja
+
+Toiminnot:
+	Uuden pelin aloittaminen
+	Pelaaminen
+	(Pelin tallentaminen)
+	Tallennetun pelin jatkaminen
