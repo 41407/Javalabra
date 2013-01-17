@@ -4,9 +4,6 @@
  */
 package projekti;
 
-import grafiikka.Kayttoliittyma;
-import grafiikka.Kuvio;
-import javax.swing.SwingUtilities;
 import logiikka.Hahmo;
 
 /**

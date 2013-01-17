@@ -8,10 +8,10 @@ package logiikka;
  *
  * @author jiji
  */
-public class Hahmo extends Piste{
-    private Piste sijainti;
+public class Taso {
+    private Hahmo pelaaja;
     
-    public Hahmo(int x, int y) {
-        super(x, y);
+    public Taso(Hahmo pelaaja) {
+        this.pelaaja = pelaaja;
     }
 }
