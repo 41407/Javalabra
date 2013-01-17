@@ -42,7 +42,7 @@ public class logiikkaTest {
     @Test
     public void pisteGetXJaGetYToimivat() {
         Piste p = new Piste(0, 0);
-        assertTrue(p.getX() == 0);
+        assertTrue("Väärä arvo", p.getX() == 0);
         assertTrue(p.getY() == 0);
     }
 

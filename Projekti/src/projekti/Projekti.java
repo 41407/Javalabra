@@ -16,10 +16,10 @@ public class Projekti {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
- //       Kayttoliittyma kayttoliittyma = new Kayttoliittyma(new Kuvio(100, 50));
- //       SwingUtilities.invokeLater(kayttoliittyma);
-        
-        Hahmo ukko = new Hahmo(0,0);
-        
+        //       Kayttoliittyma kayttoliittyma = new Kayttoliittyma(new Kuvio(100, 50));
+        //       SwingUtilities.invokeLater(kayttoliittyma);
+
+        Hahmo ukko = new Hahmo(0, 0);
+
     }
 }
