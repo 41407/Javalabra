@@ -12,20 +12,22 @@ import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+import tasonLogiikka.Hahmo;
 
 public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
-    private Kuvio kuvio;
+    private Kuuntelija kuuntelija;
+    private Hahmo pelaaja;
     
-    public Kayttoliittyma(Kuvio kuvio) {
-        this.kuvio = kuvio;
+    public Kayttoliittyma(Hahmo pelaaja) {
+        this.pelaaja = pelaaja;
     }
 
     @Override
     public void run() {
         frame = new JFrame("Otsikko");
-        frame.setPreferredSize(new Dimension(400, 200));
+        frame.setPreferredSize(new Dimension(400, 300));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -36,8 +38,9 @@ public class Kayttoliittyma implements Runnable {
     }
 
     private void luoKomponentit(Container container) {
-        Piirtoalusta piirtoalusta = new Piirtoalusta(kuvio);
+        Piirtoalusta piirtoalusta = new Piirtoalusta();
         container.add(piirtoalusta);
+        frame.addKeyListener(new Kuuntelija(pelaaja));
     }
 
     public JFrame getFrame() {

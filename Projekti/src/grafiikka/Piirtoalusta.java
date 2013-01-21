@@ -16,14 +16,15 @@ public class Piirtoalusta extends JPanel {
 
     private Kuvio kuvio;
 
-    public Piirtoalusta(Kuvio kuvio) {
+    public Piirtoalusta() {
         super.setBackground(Color.WHITE);
-        this.kuvio = kuvio;
+        this.kuvio = new Kuvio(20,20);
     }
 
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         kuvio.piirra(graphics);
+        
     }
 }

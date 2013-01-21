@@ -5,7 +5,7 @@
 package grafiikka;
 
 import java.awt.Graphics;
-import logiikka.Piste;
+import tasonLogiikka.Piste;
 
 /**
  *
