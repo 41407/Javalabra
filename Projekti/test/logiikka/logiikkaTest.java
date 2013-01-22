@@ -142,7 +142,8 @@ public class logiikkaTest {
             t.getHahmo().liikuVasemmalle(t);
         }
 
-        assertTrue("Hahmo pääsi seinästä läpi vasemmalle paahtaessaan. x = "+ t.getHahmo().getX(), t.getHahmo().getX() > 0);
+        assertTrue("Hahmo pääsi seinästä läpi vasemmalle paahtaessaan. x = "+ 
+                t.getHahmo().getX(), t.getHahmo().getX() > 0);
 
     }
 
@@ -154,7 +155,8 @@ public class logiikkaTest {
             t.getHahmo().liikuOikealle(t);
         }
 
-        assertTrue("Hahmo pääsi seinästä läpi oikealle paahtaessaan. x = "+ t.getHahmo().getX(), t.getHahmo().getX() < -50);
+        assertTrue("Hahmo pääsi seinästä läpi oikealle paahtaessaan. x = "+ 
+                t.getHahmo().getX(), t.getHahmo().getX() < -50);
 
     }
 }
