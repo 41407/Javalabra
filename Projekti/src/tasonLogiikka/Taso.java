@@ -22,8 +22,16 @@ public class Taso {
     public void lisaaEste(Este este) {
         esteet.add(este);
     }
+    
+    /**
+     *
+     * @return Palauttaa arraylistinä tasoon kuuluvat esteet.
+     */
+    public ArrayList<Este> getEsteet() {
+        return esteet;
+    }
 
-    public Hahmo getPelaaja() {
+    public Hahmo getHahmo() {
         return pelaaja;
     }
     

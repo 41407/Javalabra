@@ -24,30 +24,31 @@ public class Juoksu {
     }
 
     /**
-     *  Iskee tulille leveelin ja käyttöliittymän
+     * Iskee tulille leveelin ja käyttöliittymän
      */
     public void initialisoiSysteemit() {
         this.taso = new Taso(new Hahmo(0, 0));
         taso.lisaaEste(new Este(0, 20, 500, 50));
 
-        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(taso.getPelaaja());
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(taso);
         SwingUtilities.invokeLater(kayttoliittyma);
     }
 
     /**
-     *  Pääluuppi
+     * Pääluuppi
      */
     public void juokse() {
         while (true) {
 
             try {
-                Thread.sleep(200);
+                Thread.sleep(500);
             } catch (InterruptedException ex) {
                 System.out.println("joku meni vituiks :D");
             }
-            
-            taso.getPelaaja().putoa(taso);
-            System.out.println("Pelaajan y-sijainti: "+ taso.getPelaaja().getY());
+
+            taso.getHahmo().putoa(taso);
+            System.out.println("Pelaajan y-sijainti: " + taso.getHahmo().getY());
+            System.out.println("Pelaajan x-sijainti: " + taso.getHahmo().getX());
         }
     }
 }

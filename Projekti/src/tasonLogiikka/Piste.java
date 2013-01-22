@@ -45,7 +45,7 @@ public class Piste {
         this.x += dx;
         this.y += dy;
     }
-
+    
     public int getX() {
         return this.x;
     }
