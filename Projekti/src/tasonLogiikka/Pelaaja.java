@@ -8,10 +8,17 @@ package tasonLogiikka;
  *
  * @author jiji
  */
-public class Hahmo extends Piste {
+public class Pelaaja extends Piste {
 
-    public Hahmo(int x, int y) {
+    private int yNopeus;
+    private final int putoamiskiihtyvyys;  // joopa
+    private final int terminaalinopeus;    // joo
+    
+    public Pelaaja(int x, int y) {
         super(x, y);
+        yNopeus = 0;
+        putoamiskiihtyvyys = 1;
+        terminaalinopeus = 10;
     }
 
     /**
@@ -19,9 +26,18 @@ public class Hahmo extends Piste {
      * paikoillaan.
      */
     public void putoa(Taso taso) {
-        Piste testattavaPiste = new Piste(this.getX(), this.getY() + 1);
+        if (yNopeus < terminaalinopeus) {
+            yNopeus += putoamiskiihtyvyys;
+        }
+        Piste testattavaPiste = new Piste(this.getX(), this.getY() + yNopeus);
         if (!taso.onkoPisteessaEste(testattavaPiste)) {
-            this.siirra(0, 1);
+            this.siirra(0, yNopeus);
+        } else {
+            while(taso.onkoPisteessaEste(testattavaPiste)) {
+                testattavaPiste.siirra(0, -1);
+                yNopeus--;
+            }
+            this.siirra(0, yNopeus);
         }
     }
 

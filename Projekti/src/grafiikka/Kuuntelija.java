@@ -19,7 +19,7 @@ public class Kuuntelija implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent ke) {
-        System.out.println("Liepä turha metodi!");
+        // Liepä turha metodi!
     }
 
     @Override
@@ -33,10 +33,11 @@ public class Kuuntelija implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent ke) {
-        if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
+   /*     if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
             System.out.println("Releoitu vasuri!");
         } else if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
             System.out.println("Releoitu oikuri!");
         }
+    */
     }
 }

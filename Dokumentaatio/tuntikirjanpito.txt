@@ -1,11 +1,13 @@
 16. 1. 2013: 1.5h
-Aloitus, Github-repo käyntiin, ideointia
+- Aloitus, Github-repo käyntiin, ideointia
 
 17. 1. 2013: 2h
-Pajassa ihmettelyä
+- Pajassa ihmettelyä
 
 21. 1. 2013: 2h
-Ohjelman rakenteen parissa pähkäilyä, alkeellisia luokkia jotka ehkä tekevät jo jotain. Tuloksena pelaaja joka putoaa kunnes osuu esteeseen.
+- Ohjelman rakenteen parissa pähkäilyä, alkeellisia luokkia jotka ehkä tekevät jo jotain. Tuloksena pelaaja joka putoaa kunnes osuu esteeseen.
 
-22. 1. 2013: 1.5h
-Testejä, hahmoa pystyy liikuttamaan alkeellisesti vasemmalle ja oikealle ja se ei pääse seinistä läpi.
+22. 1. 2013: 3.5h
+- Testejä, hahmoa pystyy liikuttamaan alkeellisesti vasemmalle ja oikealle ja se ei pääse seinistä läpi.
+- Hahmon putoamiskiihtyvyys lisätty, tämä mahdollistaa myös hyppäämisen implementoinnin.
+- Luokkakaavio lisätty dokumentaatiokansioon.

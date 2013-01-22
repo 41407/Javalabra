@@ -11,10 +11,10 @@ import java.util.ArrayList;
  * @author jiji
  */
 public class Taso {
-    private Hahmo pelaaja;
+    private Pelaaja pelaaja;
     private ArrayList<Este> esteet;
     
-    public Taso(Hahmo pelaaja) {
+    public Taso(Pelaaja pelaaja) {
         this.pelaaja = pelaaja;
         this.esteet = new ArrayList();
     }
@@ -31,7 +31,7 @@ public class Taso {
         return esteet;
     }
 
-    public Hahmo getHahmo() {
+    public Pelaaja getHahmo() {
         return pelaaja;
     }
     

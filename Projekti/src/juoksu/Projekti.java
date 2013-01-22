@@ -7,7 +7,7 @@ package juoksu;
 import grafiikka.Kayttoliittyma;
 import grafiikka.Kuvio;
 import javax.swing.SwingUtilities;
-import tasonLogiikka.Hahmo;
+import tasonLogiikka.Pelaaja;
 
 /**
  *

@@ -7,7 +7,7 @@ package juoksu;
 import grafiikka.Kayttoliittyma;
 import javax.swing.SwingUtilities;
 import tasonLogiikka.Este;
-import tasonLogiikka.Hahmo;
+import tasonLogiikka.Pelaaja;
 import tasonLogiikka.Taso;
 
 /**
@@ -27,7 +27,7 @@ public class Juoksu {
      * Iskee tulille leveelin ja käyttöliittymän
      */
     public void initialisoiSysteemit() {
-        this.taso = new Taso(new Hahmo(0, 0));
+        this.taso = new Taso(new Pelaaja(0, 0));
         taso.lisaaEste(new Este(0, 20, 500, 50));
 
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(taso);
