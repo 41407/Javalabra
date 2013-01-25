@@ -7,13 +7,13 @@ package grafiikka;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import tasonLogiikka.Taso;
+import tasonLogiikka.Pelaaja;
 
 public class Kuuntelija implements KeyListener {
-    private Taso taso;
+    private Pelaaja pelaaja;
 
-    public Kuuntelija(Taso taso) {
-        this.taso = taso;
+    public Kuuntelija(Pelaaja pelaaja) {
+        this.pelaaja = pelaaja;
     }
     
 
@@ -25,19 +25,20 @@ public class Kuuntelija implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            taso.getHahmo().liikuVasemmalle(taso);
+            pelaaja.liikuVasemmalle();
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            taso.getHahmo().liikuOikealle(taso);
+            pelaaja.liikuOikealle();
+        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            pelaaja.hyppaa();
         }
     }
 
     @Override
     public void keyReleased(KeyEvent ke) {
-   /*     if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
+        if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
             System.out.println("Releoitu vasuri!");
         } else if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
             System.out.println("Releoitu oikuri!");
         }
-    */
     }
 }

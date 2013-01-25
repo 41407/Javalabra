@@ -12,16 +12,16 @@ import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import tasonLogiikka.Taso;
+import tasonLogiikka.Pelaaja;
 
 public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
     private Kuuntelija kuuntelija;
-    private Taso taso;
+    private Pelaaja pelaaja;
     
-    public Kayttoliittyma(Taso taso) {
-        this.taso = taso;
+    public Kayttoliittyma(Pelaaja pelaaja) {
+        this.pelaaja = pelaaja;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class Kayttoliittyma implements Runnable {
     private void luoKomponentit(Container container) {
         Piirtoalusta piirtoalusta = new Piirtoalusta();
         container.add(piirtoalusta);
-        frame.addKeyListener(new Kuuntelija(taso));
+        frame.addKeyListener(new Kuuntelija(pelaaja));
     }
 
     public JFrame getFrame() {

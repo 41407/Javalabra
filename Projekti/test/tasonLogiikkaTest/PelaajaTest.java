@@ -24,6 +24,7 @@ public class PelaajaTest {
     Piste p;
     Este e;
     Taso t;
+    Pelaaja pe;
 
     public PelaajaTest() {
     }
@@ -40,7 +41,8 @@ public class PelaajaTest {
     public void setUp() {
         this.p = new Piste(0, 0);
         this.e = new Este(0, 0, 10, 10);
-        this.t = new Taso(new Pelaaja(5, 0));
+        this.t = new Taso();
+        this.pe = new Pelaaja(0,0,t);
     }
 
     @After
@@ -49,10 +51,10 @@ public class PelaajaTest {
 
     @Test
     public void hahmoPutoaaAlkeellisesti() {
-        int hahmonKoordinaattiAlussa = t.getHahmo().getY();
-        t.getHahmo().putoa(t);
+        int hahmonKoordinaattiAlussa = pe.getY();
+        pe.eksistoi();
 
-        assertTrue("Hahmo ei liikkunut alaspäin!", t.getHahmo().getY()
+        assertTrue("Hahmo ei liikkunut alaspäin!", pe.getY()
                 > hahmonKoordinaattiAlussa);
     }
 
@@ -62,13 +64,13 @@ public class PelaajaTest {
          * tulee muuttumaan
          */
 
-        int hahmonKoordinaattiAlussa = t.getHahmo().getY();
+        int hahmonKoordinaattiAlussa = pe.getY();
         t.lisaaEste(e);
         for (int i = 0; i < 20; i++) {
-            t.getHahmo().putoa(t);
+            pe.eksistoi();
         }
         assertTrue("Hahmo ei pysähtynyt esteesen vaan jatkoi y = "
-                + t.getHahmo().getY(), t.getHahmo().getY() <= 10);
+                + pe.getY(), pe.getY() <= 10);
     }
 
     @Test
@@ -76,38 +78,39 @@ public class PelaajaTest {
         /* Aika liberaali testi koska putoamisen mekaniikka
          * tulee muuttumaan
          */
-        t.getHahmo().siirra(0, -50);
-        int hahmonKoordinaattiAlussa = t.getHahmo().getY();
+        pe.siirra(0, -50);
+        int hahmonKoordinaattiAlussa = pe.getY();
         
         t.lisaaEste(e);
         for (int i = 0; i < 100; i++) {
-            t.getHahmo().putoa(t);
+            pe.eksistoi();
         }
         assertTrue("Hahmo ei pysähtynyt esteesen vaan jatkoi y = "
-                + t.getHahmo().getY(), t.getHahmo().getY() <= 10);
+                + pe.getY(), pe.getY() <= 10);
     }
 
     @Test
     public void hahmoLiikkuuVasemmalle() {
-        int hahmonKoordinaattiAlussa = t.getHahmo().getX();
-        t.getHahmo().liikuVasemmalle(t);
+        int hahmonKoordinaattiAlussa = pe.getX();
+        pe.liikuVasemmalle();
 
-        assertTrue("Hahmo ei liikkunut vasemmalle", t.getHahmo().getX()
+        assertTrue("Hahmo ei liikkunut vasemmalle", pe.getX()
                 < hahmonKoordinaattiAlussa);
     }
 
     @Test
     public void hahmoLiikkuuOikealle() {
-        int hahmonKoordinaattiAlussa = t.getHahmo().getX();
-        t.getHahmo().liikuOikealle(t);
+        int hahmonKoordinaattiAlussa = pe.getX();
+        pe.liikuOikealle();
 
-        assertTrue("Hahmo ei liikkunut oikealle", t.getHahmo().getX()
+        assertTrue("Hahmo ei liikkunut oikealle", pe.getX()
                 > hahmonKoordinaattiAlussa);
     }
 
     // Apumetodi
     public void laitetaasPariEstetta() {
-        t = new Taso(new Pelaaja(5, 95));
+        t = new Taso();
+        pe = new Pelaaja(5,95, t);
         t.lisaaEste(new Este(-50, 0, 0, 200));
         t.lisaaEste(new Este(-100, 100, 200, 150));
     }
@@ -116,23 +119,23 @@ public class PelaajaTest {
     public void hahmoEiPaaseVasemmallaPuolellaOlevastaEsteestaLapi() {
         laitetaasPariEstetta();
         for (int i = 0; i < 100; i++) {
-            t.getHahmo().liikuVasemmalle(t);
+            pe.liikuVasemmalle();
         }
 
         assertTrue("Hahmo pääsi seinästä läpi vasemmalle paahtaessaan. x = "
-                + t.getHahmo().getX(), t.getHahmo().getX() > 0);
+                + pe.getX(), pe.getX() > 0);
 
     }
 
     @Test
     public void hahmoEiPaaseOikeallaPuolellaOlevastaEsteestaLapi() {
         laitetaasPariEstetta();
-        t.getHahmo().siirra(-60, 0);
+        pe.siirra(-60, 0);
         for (int i = 0; i < 100; i++) {
-            t.getHahmo().liikuOikealle(t);
+            pe.liikuOikealle();
         }
 
         assertTrue("Hahmo pääsi seinästä läpi oikealle paahtaessaan. x = "
-                + t.getHahmo().getX(), t.getHahmo().getX() < -50);
+                + pe.getX(), pe.getX() < -50);
     }
 }

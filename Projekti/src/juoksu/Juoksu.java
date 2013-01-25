@@ -16,7 +16,7 @@ import tasonLogiikka.Taso;
  */
 public class Juoksu {
 
-    private Taso taso;
+    private Pelaaja pelaaja;
 
     public Juoksu() {
         initialisoiSysteemit();
@@ -27,10 +27,11 @@ public class Juoksu {
      * Iskee tulille leveelin ja käyttöliittymän
      */
     public void initialisoiSysteemit() {
-        this.taso = new Taso(new Pelaaja(0, 0));
+        Taso taso = new Taso();
+        this.pelaaja = new Pelaaja(0, 0, taso);
         taso.lisaaEste(new Este(0, 20, 500, 50));
 
-        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(taso);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(pelaaja);
         SwingUtilities.invokeLater(kayttoliittyma);
     }
 
@@ -46,9 +47,9 @@ public class Juoksu {
                 System.out.println("joku meni vituiks :D");
             }
 
-            taso.getHahmo().putoa(taso);
-            System.out.println("Pelaajan y-sijainti: " + taso.getHahmo().getY());
-            System.out.println("Pelaajan x-sijainti: " + taso.getHahmo().getX());
+            pelaaja.eksistoi();
+            System.out.println("Pelaajan y-sijainti: " + pelaaja.getY());
+            System.out.println("Pelaajan x-sijainti: " + pelaaja.getX());
         }
     }
 }

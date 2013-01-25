@@ -11,11 +11,9 @@ import java.util.ArrayList;
  * @author jiji
  */
 public class Taso {
-    private Pelaaja pelaaja;
     private ArrayList<Este> esteet;
     
-    public Taso(Pelaaja pelaaja) {
-        this.pelaaja = pelaaja;
+    public Taso() {
         this.esteet = new ArrayList();
     }
     
@@ -29,10 +27,6 @@ public class Taso {
      */
     public ArrayList<Este> getEsteet() {
         return esteet;
-    }
-
-    public Pelaaja getHahmo() {
-        return pelaaja;
     }
     
     /**

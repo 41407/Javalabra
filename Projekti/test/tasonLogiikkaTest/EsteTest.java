@@ -40,7 +40,7 @@ public class EsteTest {
     public void setUp() {
         this.p = new Piste(0, 0);
         this.e = new Este(0, 0, 10, 10);
-        this.t = new Taso(new Pelaaja(5, 0));
+        this.t = new Taso();
     }
 
     @After
