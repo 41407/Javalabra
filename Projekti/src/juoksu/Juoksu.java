@@ -30,10 +30,11 @@ public class Juoksu {
     public void initialisoiSysteemit() {
         Taso taso = new Taso();
         this.pelaaja = new Pelaaja(20, 0, taso);
-        taso.lisaaEste(new Este(0, 250, 800, 480));
+        taso.lisaaEste(new Este(0, 250, 300, 480));
         taso.lisaaEste(new Este(0, 270, 500, 400));
         taso.lisaaEste(new Este(550, 340, 700, 342));
-
+        taso.lisaaEste(new Este(50, 500, 650, 560));
+        
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(pelaaja);
         SwingUtilities.invokeLater(kayttoliittyma);
     }
