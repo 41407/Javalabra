@@ -27,7 +27,7 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Otsikko");
-        frame.setPreferredSize(new Dimension(400, 300));
+        frame.setPreferredSize(new Dimension(800, 600));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,7 +38,7 @@ public class Kayttoliittyma implements Runnable {
     }
 
     private void luoKomponentit(Container container) {
-        Piirtoalusta piirtoalusta = new Piirtoalusta();
+        Piirtoalusta piirtoalusta = new Piirtoalusta(pelaaja);
         container.add(piirtoalusta);
         frame.addKeyListener(new Kuuntelija(pelaaja));
     }
