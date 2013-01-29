@@ -15,11 +15,11 @@ import tasonLogiikka.Taso;
  *
  * @author jiji
  */
-public class Kuvio {
+public class Piirtaja {
 
     Pelaaja pelaaja;
 
-    public Kuvio(Pelaaja pelaaja) {
+    public Piirtaja(Pelaaja pelaaja) {
         this.pelaaja = pelaaja;
     }
 

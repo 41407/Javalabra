@@ -11,3 +11,14 @@
 - Testejä, hahmoa pystyy liikuttamaan alkeellisesti vasemmalle ja oikealle ja se ei pääse seinistä läpi.
 - Hahmon putoamiskiihtyvyys lisätty, tämä mahdollistaa myös hyppäämisen implementoinnin.
 - Luokkakaavio lisätty dokumentaatiokansioon.
+
+25. 1. 2013: 1.5h
+- Pelaajaolio muutettu ns. jumalolioksi joka on vastuussa Tasosta, koska ei pelaajaa ilman tasoa.
+
+29.1 .2013: 2.5h
+- Pelaajan hyppääminen implementoitu ja sivuttaisliikkumista paranneltu
+- Pelaajan putoamisen törmäyksen detehointi on nyt pomminvarmahko(?)
+- Key listener koki oivan parannuksen
+- Peli on nyt marginaalisen graafinen.
+- Luokkakaavio updated
+- Manuaaliset testit.txt lisätty

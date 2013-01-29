@@ -15,19 +15,17 @@ import tasonLogiikka.Pelaaja;
 
 public class Piirtoalusta extends JPanel {
 
-    private Kuvio kuvio;
-    private Pelaaja pelaaja;
+    private Piirtaja piirtaja;
 
     public Piirtoalusta(Pelaaja pelaaja) {
         super.setBackground(Color.WHITE);
-        this.kuvio = new Kuvio(pelaaja);
-        this.pelaaja = pelaaja;
+        this.piirtaja = new Piirtaja(pelaaja);
     }
 
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
-        kuvio.piirra(graphics);
+        piirtaja.piirra(graphics);
         this.repaint();
         
     }

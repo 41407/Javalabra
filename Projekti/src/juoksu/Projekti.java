@@ -5,7 +5,7 @@
 package juoksu;
 
 import grafiikka.Kayttoliittyma;
-import grafiikka.Kuvio;
+import grafiikka.Piirtaja;
 import javax.swing.SwingUtilities;
 import tasonLogiikka.Pelaaja;
 
