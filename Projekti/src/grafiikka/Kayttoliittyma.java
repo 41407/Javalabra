@@ -19,15 +19,17 @@ public class Kayttoliittyma implements Runnable {
     private JFrame frame;
     private Kuuntelija kuuntelija;
     private Pelaaja pelaaja;
+    private Kamera kamera;
     
-    public Kayttoliittyma(Pelaaja pelaaja) {
+    public Kayttoliittyma(Pelaaja pelaaja, Kamera kamera) {
         this.pelaaja = pelaaja;
+        this.kamera = kamera;
     }
 
     @Override
     public void run() {
         frame = new JFrame("Otsikko");
-        frame.setPreferredSize(new Dimension(800, 600));
+        frame.setPreferredSize(new Dimension(1024, 800));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,7 +40,7 @@ public class Kayttoliittyma implements Runnable {
     }
 
     private void luoKomponentit(Container container) {
-        Piirtoalusta piirtoalusta = new Piirtoalusta(pelaaja);
+        Piirtoalusta piirtoalusta = new Piirtoalusta(pelaaja, kamera);
         container.add(piirtoalusta);
         frame.addKeyListener(new Kuuntelija(pelaaja));
     }

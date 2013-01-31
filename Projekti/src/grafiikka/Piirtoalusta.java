@@ -17,9 +17,9 @@ public class Piirtoalusta extends JPanel {
 
     private Piirtaja piirtaja;
 
-    public Piirtoalusta(Pelaaja pelaaja) {
+    public Piirtoalusta(Pelaaja pelaaja, Kamera kamera) {
         super.setBackground(Color.WHITE);
-        this.piirtaja = new Piirtaja(pelaaja);
+        this.piirtaja = new Piirtaja(pelaaja, kamera);
     }
 
     @Override

@@ -18,9 +18,11 @@ import tasonLogiikka.Taso;
 public class Piirtaja {
 
     Pelaaja pelaaja;
+    Kamera kamera;
 
-    public Piirtaja(Pelaaja pelaaja) {
+    public Piirtaja(Pelaaja pelaaja, Kamera kamera) {
         this.pelaaja = pelaaja;
+        this.kamera = kamera;
     }
 
     public void piirra(Graphics graphics) {
@@ -29,7 +31,10 @@ public class Piirtaja {
     }
 
     private void piirraPelaaja(Graphics graphics) {
-        graphics.fillRect(pelaaja.getX()-12, pelaaja.getY()-32, 24, 32);
+        graphics.fillRect(-kamera.getX() + pelaaja.getX() - 12,
+                -kamera.getY() + pelaaja.getY() - 32,
+                24,
+                32);
     }
 
     private void piirraTaso(Graphics graphics, Taso taso) {
@@ -43,6 +48,9 @@ public class Piirtaja {
 
     private void piirraEste(Graphics graphics, Este este) {
         ArrayList<Piste> pisteet = este.getPisteet();
-        graphics.fillRect(pisteet.get(0).getX(), pisteet.get(0).getY(), pisteet.get(1).getX()-pisteet.get(0).getX(), pisteet.get(1).getY()-pisteet.get(0).getY());
+        graphics.fillRect(-kamera.getX() + pisteet.get(0).getX(),
+                -kamera.getY() + pisteet.get(0).getY(),
+                pisteet.get(1).getX() - pisteet.get(0).getX(),
+                pisteet.get(1).getY() - pisteet.get(0).getY());
     }
 }
