@@ -13,6 +13,11 @@ public class Piste {
     private int x;
     private int y;
 
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
+
     /**
      * Konstruoi määrittelemätön piste
      */
@@ -52,6 +57,11 @@ public class Piste {
 
     public void setY(int y) {
         this.y = y;
+    }
+    
+    public void setXY(Piste piste) {
+        this.x = piste.getX();
+        this.y = piste.getY();
     }
     
     public int getX() {

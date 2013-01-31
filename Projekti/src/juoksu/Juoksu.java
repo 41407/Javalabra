@@ -6,10 +6,13 @@ package juoksu;
 
 import grafiikka.Kamera;
 import grafiikka.Kayttoliittyma;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import tasonLogiikka.Este;
 import tasonLogiikka.Pelaaja;
 import tasonLogiikka.Taso;
+import tiedosto.Tiedostonlukija;
 
 /**
  *
@@ -17,7 +20,7 @@ import tasonLogiikka.Taso;
  */
 public class Juoksu {
 
-    private Pelaaja pelaaja;    
+    private Pelaaja pelaaja;
     private Kamera kamera;
 
     public Juoksu() {
@@ -30,15 +33,19 @@ public class Juoksu {
      */
     public void initialisoiSysteemit() {
         Taso taso = new Taso();
-        this.kamera = new Kamera(0,0);
-        this.pelaaja = new Pelaaja(20, 0, taso);
-        taso.lisaaEste(new Este(0, 269, 300, 480));
-        taso.lisaaEste(new Este(0, 270, 500, 400));
-        taso.lisaaEste(new Este(550, 340, 700, 342));
-        taso.lisaaEste(new Este(50, 500, 650, 560));
-        
+        this.kamera = new Kamera(0, 0);
+
+
+        try {
+            Tiedostonlukija lukija = new Tiedostonlukija("src/taso.txt");
+            this.pelaaja = new Pelaaja(20, 0, lukija.luoTaso());
+        } catch (Exception ex) {
+            Logger.getLogger(Juoksu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(pelaaja, kamera);
         SwingUtilities.invokeLater(kayttoliittyma);
+
     }
 
     /**
@@ -55,8 +62,8 @@ public class Juoksu {
 
             pelaaja.eksistoi();
             kamera.seuraa(pelaaja);
-            System.out.println("Kameran x-sijainti: " + kamera.getX());
-  //          System.out.println("Pelaajan x-sijainti: " + pelaaja.getX());
+            //          System.out.println("Kameran x-sijainti: " + kamera.getX());
+            //          System.out.println("Pelaajan x-sijainti: " + pelaaja.getX());
         }
     }
 }

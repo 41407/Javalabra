@@ -23,9 +23,10 @@
 - Luokkakaavio updated
 - Manuaaliset testit.txt lisätty
 
-31. 1. 2013: 1.5h
+31. 1. 2013: 3.5h
 - Pelaajan liikkumista höylätty
 - Pelaaja.javaa refaktoroitu
 - Pelaajan törmäystunnistus on nyt tarkempi
 - Dynaaminen kamera implementoitu
+- Taso luetaan nyt tiedostosta
 

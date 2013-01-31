@@ -34,6 +34,7 @@ public class Pelaaja extends Piste {
         terminaalinopeus = 50;
         ukkelinKorkeus = 32;
         this.taso = taso;
+        this.setXY(taso.getPelaajanAlkusijainti());
     }
 
     public int getyNopeus() {
@@ -164,24 +165,18 @@ public class Pelaaja extends Piste {
         /* Koska kivitaulussa lukee, että hahmon leveys on 24 pixeliä, ja
          * meitä ei kiinnosta hahmon sisällä mahdollisesti majailevat esteet,
          */
-        Piste testattavaPiste = new Piste(this.getX() + 12 * suunta, this.getY());
+        Piste testattavaPiste = new Piste(this.getX() + 12 * suunta, this.getY() - ukkelinKorkeus);
 
 
         /*
          * Loopilla testaamme pikselit koko ukkelin korkeudelta 2px resoluutiolla.
          */
-        while (testattavaPiste.getY() > this.getY() - ukkelinKorkeus) {
+        while (testattavaPiste.getY() <= this.getY()) {
             xTestattava = 0;
             while (xTestattava < absNopeus) {
                 testattavaPiste.siirra(suunta, 0);
 
                 if (testaaPiste(testattavaPiste)) {
-
-                    /* Jos este löytyy, hahmo pysähtyy kuin
-                     *              ...seinään
-                     */
-                    xNopeus = 0;
-                    xSuunta = 0;
                     loytyikoEste = true;
                     break;
                 } else {
@@ -192,7 +187,19 @@ public class Pelaaja extends Piste {
                 break;
             }
             testattavaPiste.setX(this.getX() + 12 * suunta);
-            testattavaPiste.siirra(0, -2);
+            testattavaPiste.siirra(0, 2);
+        }
+        if (loytyikoEste) {
+            if (testattavaPiste.getY() >= this.getY() -2) {
+                this.yNopeus = -2;
+            } else {
+                /* Jos este löytyy ja on korkea, hahmo pysähtyy kuin
+                 *              ...seinään
+                 */
+
+                xNopeus = 0;
+                xSuunta = 0;
+            }
         }
         return xTestattava * suunta;
     }

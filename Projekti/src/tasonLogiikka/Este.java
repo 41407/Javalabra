@@ -22,6 +22,16 @@ public class Este {
         this.oikeaAlakulma = new Piste(x1, y1);
     }
     
+    public Este(Piste xy0, Piste xy1) {
+        this.vasenYlakulma = xy0;
+        this.oikeaAlakulma = xy1;
+    }
+    
+    public Este(ArrayList<Piste> pisteet) {
+        this.vasenYlakulma = pisteet.get(0);
+        this.oikeaAlakulma = pisteet.get(1);
+    }
+    
     /**
      * Testaa sijaitseeko parametrinä annettu piste esteen peittämällä alueella.
      * @param piste

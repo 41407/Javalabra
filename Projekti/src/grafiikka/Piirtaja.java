@@ -5,7 +5,9 @@
 package grafiikka;
 
 import java.awt.Graphics;
+import java.awt.Polygon;
 import java.util.ArrayList;
+import java.util.Random;
 import tasonLogiikka.Este;
 import tasonLogiikka.Pelaaja;
 import tasonLogiikka.Piste;
@@ -31,10 +33,10 @@ public class Piirtaja {
     }
 
     private void piirraPelaaja(Graphics graphics) {
-        graphics.fillRect(-kamera.getX() + pelaaja.getX() - 12,
-                -kamera.getY() + pelaaja.getY() - 32,
-                24,
-                32);
+        graphics.fillRect(-kamera.getX() + pelaaja.getX() - 14,
+                -kamera.getY() + pelaaja.getY() - 36,
+                28,
+                38);
     }
 
     private void piirraTaso(Graphics graphics, Taso taso) {
