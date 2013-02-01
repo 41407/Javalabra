@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import tasonLogiikka.EsteenTyyppi;
 import tasonLogiikka.Pelaaja;
 import tasonLogiikka.Taso;
 
@@ -38,7 +39,7 @@ public class TasoTest {
 
     @Before
     public void setUp() {
-        this.p = new Piste(0, 0);
+        this.p = new Piste(5, 5);
         this.e = new Este(0, 0, 10, 10);
         this.t = new Taso();
     }
@@ -48,26 +49,22 @@ public class TasoTest {
     }
 
     @Test
-    public void esteKuuluukoPiste() {
-
-        /*
-         * Tää testi saattaa kämähtää jos teen hankalamman muotoisia
-         * esteitä kuin suorakaiteita!
-         */
-
-        assertTrue("Vasen yläkulma pieleen", e.kuuluukoPiste(p) == true);
-        p.siirra(10, 0);
-        assertTrue("Oikea yläkulma pieleen", e.kuuluukoPiste(p) == true);
-        p.siirra(0, 10);
-        assertTrue("Oikea alakulma pieleen", e.kuuluukoPiste(p) == true);
-        p.siirra(-10, 0);
-        assertTrue("Vasen alakulma pieleen", e.kuuluukoPiste(p) == true);
+    public void tasoKuuluukoPiste() {
+        t.lisaaEste(e);
+        assertTrue("onkoPisteessaEste() antoi väärän arvon olisi pitänyt olla true", 
+                t.onkoPisteessaEste(p) != null);
+        p.siirra(20, 0);
+        assertTrue("onkoPisteessaEste() antoi väärän arvon", 
+                t.onkoPisteessaEste(p) == null);
     }
 
     @Test
-    public void tasoKuuluukoPiste() {
-        t.lisaaEste(e);
-
-        this.esteKuuluukoPiste();
+    public void tasoAsetaPelaajanAlkusijaintiToimii() {
+        Piste r = new Piste(20, 20);
+        t.asetaPelaajanAlkusijainti(r);
+        Pelaaja pe = new Pelaaja(t);
+        assertTrue("Pelaajan alkusijainti oli väärä", pe.getX() == 20 && pe.getY() == 20);
+        assertTrue("GetPelaajanAlkusijainti palautti väärin",
+                t.getPelaajanAlkusijainti() == r);
     }
 }

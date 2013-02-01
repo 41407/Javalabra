@@ -27,6 +27,5 @@ public class Piirtoalusta extends JPanel {
         super.paintComponent(graphics);
         piirtaja.piirra(graphics);
         this.repaint();
-        
     }
 }

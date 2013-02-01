@@ -18,14 +18,15 @@ public class Pelaaja extends Piste {
     private final int terminaalinopeus;             // joo
     private final int ukkelinKorkeus;               // heh
     private Taso taso;
+    private EsteenTyyppi osuikoJohonkin = null;     // dsfasd
 
     /**
      * @param x
      * @param y
      * @param taso
      */
-    public Pelaaja(int x, int y, Taso taso) {
-        super(x, y);
+    public Pelaaja(Taso taso) {
+        super(0, 0);
         yNopeus = 0;
         xNopeus = 0;
         xSuunta = 0;
@@ -56,9 +57,10 @@ public class Pelaaja extends Piste {
     /**
      * Jumal-metodi
      */
-    public void eksistoi() {
+    public EsteenTyyppi eksistoi() {
         liikuta();
         lenna();
+        return this.osuikoJohonkin;
     }
 
     /**
@@ -122,7 +124,22 @@ public class Pelaaja extends Piste {
     }
 
     private boolean testaaPiste(Piste piste) {
-        return (taso.onkoPisteessaEste(piste));
+        if (taso.onkoPisteessaEste(piste) == null) {
+            return false;
+        } else if (taso.onkoPisteessaEste(piste) == EsteenTyyppi.ESTE) {
+            return true;
+        } else if (taso.onkoPisteessaEste(piste) == EsteenTyyppi.MAALI) {
+            this.osuikoJohonkin = EsteenTyyppi.MAALI;
+            return true;
+        } else if (taso.onkoPisteessaEste(piste) == EsteenTyyppi.KUOLO) {
+            this.osuikoJohonkin = EsteenTyyppi.KUOLO;
+            return true;
+        }
+        return false;
+    }
+
+    public EsteenTyyppi getOsuikoJohonkin() {
+        return osuikoJohonkin;
     }
 
     private void liikuta() {
@@ -190,7 +207,7 @@ public class Pelaaja extends Piste {
             testattavaPiste.siirra(0, 2);
         }
         if (loytyikoEste) {
-            if (testattavaPiste.getY() >= this.getY() -2) {
+            if (testattavaPiste.getY() >= this.getY() - 2) {
                 this.yNopeus = -2;
             } else {
                 /* Jos este löytyy ja on korkea, hahmo pysähtyy kuin
@@ -279,9 +296,9 @@ public class Pelaaja extends Piste {
             if (xNopeus == 1 || xNopeus == -1) {
                 xNopeus = 0;
             } else if (xNopeus > 0) {
-                xNopeus -= 2;
+                xNopeus -= 3;
             } else if (xNopeus < 0) {
-                xNopeus += 2;
+                xNopeus += 3;
             }
         }
     }

@@ -9,7 +9,7 @@ import grafiikka.Kayttoliittyma;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
-import tasonLogiikka.Este;
+import tasonLogiikka.EsteenTyyppi;
 import tasonLogiikka.Pelaaja;
 import tasonLogiikka.Taso;
 import tiedosto.Tiedostonlukija;
@@ -24,46 +24,57 @@ public class Juoksu {
     private Kamera kamera;
 
     public Juoksu() {
-        initialisoiSysteemit();
+
         juokse();
     }
 
     /**
      * Iskee tulille leveelin ja käyttöliittymän
      */
-    public void initialisoiSysteemit() {
+    public void initialisoiSysteemit(int i) {
         Taso taso = new Taso();
-        this.kamera = new Kamera(0, 0);
 
 
         try {
-            Tiedostonlukija lukija = new Tiedostonlukija("src/taso.txt");
-            this.pelaaja = new Pelaaja(20, 0, lukija.luoTaso());
+            Tiedostonlukija lukija = new Tiedostonlukija("src/" + i + ".txt");
+            this.pelaaja = new Pelaaja(lukija.luoTaso());
         } catch (Exception ex) {
             Logger.getLogger(Juoksu.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        this.kamera = new Kamera(taso.getPelaajanAlkusijainti().getX(),
+                taso.getPelaajanAlkusijainti().getY() - 2000);
+
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(pelaaja, kamera);
         SwingUtilities.invokeLater(kayttoliittyma);
-
     }
 
     /**
      * Pääluuppi
      */
     public void juokse() {
+        int i = 0;
         while (true) {
+            initialisoiSysteemit(i);
 
-            try {
-                Thread.sleep(16);
-            } catch (InterruptedException ex) {
-                System.out.println("joku meni vituiks :D");
+            while (true) {
+
+                try {
+                    Thread.sleep(16);
+                } catch (InterruptedException ex) {
+                    System.out.println("joku meni vituiks :D");
+                }
+
+                pelaaja.eksistoi();
+                kamera.seuraa(pelaaja);
+                if (pelaaja.getOsuikoJohonkin() == EsteenTyyppi.MAALI) {
+                    i++;
+                    break;
+                } else if (pelaaja.getOsuikoJohonkin() == EsteenTyyppi.KUOLO) {
+                    i--;
+                    break;
+                }
             }
-
-            pelaaja.eksistoi();
-            kamera.seuraa(pelaaja);
-            //          System.out.println("Kameran x-sijainti: " + kamera.getX());
-            //          System.out.println("Pelaajan x-sijainti: " + pelaaja.getX());
         }
     }
 }

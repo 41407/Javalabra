@@ -49,18 +49,12 @@ public class EsteTest {
 
     @Test
     public void esteKuuluukoPiste() {
-
-        /*
-         * Tää testi saattaa kämähtää jos teen hankalamman muotoisia
-         * esteitä kuin suorakaiteita!
-         */
-
-        assertTrue("Vasen yläkulma pieleen", e.kuuluukoPiste(p) == true);
+        assertTrue("Vasen yläkulma pieleen", e.kuuluukoPiste(p) != null);
         p.siirra(10, 0);
-        assertTrue("Oikea yläkulma pieleen", e.kuuluukoPiste(p) == true);
+        assertTrue("Oikea yläkulma pieleen", e.kuuluukoPiste(p) != null);
         p.siirra(0, 10);
-        assertTrue("Oikea alakulma pieleen", e.kuuluukoPiste(p) == true);
+        assertTrue("Oikea alakulma pieleen", e.kuuluukoPiste(p) != null);
         p.siirra(-10, 0);
-        assertTrue("Vasen alakulma pieleen", e.kuuluukoPiste(p) == true);
+        assertTrue("Vasen alakulma pieleen", e.kuuluukoPiste(p) != null);
     }
 }

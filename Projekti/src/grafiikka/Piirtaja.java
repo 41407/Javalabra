@@ -5,9 +5,7 @@
 package grafiikka;
 
 import java.awt.Graphics;
-import java.awt.Polygon;
 import java.util.ArrayList;
-import java.util.Random;
 import tasonLogiikka.Este;
 import tasonLogiikka.Pelaaja;
 import tasonLogiikka.Piste;
@@ -28,8 +26,8 @@ public class Piirtaja {
     }
 
     public void piirra(Graphics graphics) {
-        piirraPelaaja(graphics);
         piirraTaso(graphics, pelaaja.getTaso());
+        piirraPelaaja(graphics);
     }
 
     private void piirraPelaaja(Graphics graphics) {

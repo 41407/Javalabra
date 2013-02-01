@@ -17,7 +17,12 @@ public class Taso {
 
     public Taso() {
         this.esteet = new ArrayList();
-        this.pelaajanAlkusijainti = new Piste(0,0);
+        this.pelaajanAlkusijainti = new Piste(0, 0);
+    }
+
+    public Taso(int x, int y) {
+        this.esteet = new ArrayList();
+        this.pelaajanAlkusijainti = new Piste(x, y);
     }
 
     public void lisaaEste(Este este) {
@@ -46,12 +51,12 @@ public class Taso {
      * @param piste
      * @return true jos pisteessä on este, false jos ei.
      */
-    public boolean onkoPisteessaEste(Piste piste) {
+    public EsteenTyyppi onkoPisteessaEste(Piste piste) {
         for (Este este : esteet) {
-            if (este.kuuluukoPiste(piste)) {
-                return true;
+            if (este.kuuluukoPiste(piste) != null) {
+                return este.kuuluukoPiste(piste);
             }
         }
-        return false;
+        return null;
     }
 }

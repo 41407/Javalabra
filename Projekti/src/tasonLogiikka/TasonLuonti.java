@@ -25,9 +25,13 @@ public class TasonLuonti {
         for (String string : rivit) {
             char etumerkki = string.toUpperCase().charAt(0);
             if (etumerkki == 'E') {
-                esteRivi(string);
+                esteRivi(string, EsteenTyyppi.ESTE);
             } else if (etumerkki == 'P') {
                 pelaajaRivi(string);
+            } else if (etumerkki == 'M') {
+                esteRivi(string, EsteenTyyppi.MAALI);
+            } else if (etumerkki == 'K') {
+                esteRivi(string, EsteenTyyppi.KUOLO);
             }
         }
     }
@@ -37,12 +41,14 @@ public class TasonLuonti {
     }
 
     /*
-     * Vaiheet eroteltu selkeyden vuoksi.
+     * Välivaiheet eroteltu selkeyden vuoksi.
      */
-    private void esteRivi(String string) {
+    private void esteRivi(String string, EsteenTyyppi tyyppi) {
         ArrayList<Integer> koordinaatit = stringKoordinaateiksi(string);
         ArrayList<Piste> pisteet = muutaPisteiksi(koordinaatit);
-        taso.lisaaEste(new Este(pisteet));
+        Este e = new Este(pisteet);
+        e.setTyyppi(tyyppi);
+        taso.lisaaEste(e);
     }
 
     private void pelaajaRivi(String string) {
@@ -50,6 +56,7 @@ public class TasonLuonti {
         ArrayList<Piste> pisteet = muutaPisteiksi(koordinaatit);
         taso.asetaPelaajanAlkusijainti(pisteet.get(0));
     }
+
     private ArrayList<Integer> stringKoordinaateiksi(String string) {
         /* 
          * Alotetaan string[2]:sta koska ekat 2 merkkiä on E ja spacebar
@@ -83,5 +90,4 @@ public class TasonLuonti {
         }
         return pisteet;
     }
-
 }

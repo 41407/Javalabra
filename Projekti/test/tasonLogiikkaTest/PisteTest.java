@@ -57,4 +57,15 @@ public class PisteTest {
         assertTrue("Väärä siirretyn pisteen x", p.getX() == 1);
         assertTrue("Väärä siirretyn pisteen y", p.getY() == 1);
     }
+
+    @Test
+    public void pisteSetXJaSetYToimivat() {
+        p.setX(10);
+        assertTrue("Väärä siirretyn pisteen x", p.getX() == 10);
+        p.setY(10);
+        assertTrue("Väärä siirretyn pisteen y", p.getY() == 10);
+        p.setXY(new Piste(20, 50));
+        assertTrue("Väärä siirretyn pisteen x", p.getX() == 20);
+        assertTrue("Väärä siirretyn pisteen y", p.getY() == 50);
+    }
 }

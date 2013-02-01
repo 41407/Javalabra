@@ -16,6 +16,7 @@ public class Este {
     
     private Piste vasenYlakulma;
     private Piste oikeaAlakulma;
+    private EsteenTyyppi tyyppi = EsteenTyyppi.ESTE;
 
     public Este(int x0, int y0, int x1, int y1) {
         this.vasenYlakulma = new Piste(x0, y0);
@@ -31,18 +32,22 @@ public class Este {
         this.vasenYlakulma = pisteet.get(0);
         this.oikeaAlakulma = pisteet.get(1);
     }
+
+    public void setTyyppi(EsteenTyyppi tyyppi) {
+        this.tyyppi = tyyppi;
+    }
     
     /**
      * Testaa sijaitseeko parametrinä annettu piste esteen peittämällä alueella.
      * @param piste
      * @return True jos sijaitsee, false jos ei.
      */
-    public boolean kuuluukoPiste(Piste piste) {
+    public EsteenTyyppi kuuluukoPiste(Piste piste) {
         if(piste.getX() >= vasenYlakulma.getX() && piste.getX() <= oikeaAlakulma.getX()
                 && piste.getY() >= vasenYlakulma.getY() && piste.getY() <= oikeaAlakulma.getY()) {
-            return true;
+            return tyyppi;
         }
-        return false;
+        return null;
     }
     
     /**
