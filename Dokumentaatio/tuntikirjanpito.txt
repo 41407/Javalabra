@@ -30,3 +30,8 @@
 - Dynaaminen kamera implementoitu
 - Taso luetaan nyt tiedostosta
 
+1. 2. 2013: 2h
+- Testejä
+- Esteellä on nyt tyyppi (maali tai kuolo)
+- Maaliin pääsy vie seuraavalle tasolle
+
