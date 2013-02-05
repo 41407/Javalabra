@@ -5,28 +5,69 @@
 package tasonLogiikka;
 
 /**
- *
+ * Luokka pitää sisällään kaiken logiikan pelaajan liikkumiseen liittyen, ja
+ * siihen kuuluu myös Taso.
+ * 
  * @author jiji
  */
 public class Pelaaja extends Piste {
 
+    /**
+     * Hahmon nopeus y-akselilla eli pystysuunnassa
+     */
     private int yNopeus;
+    
+    /** 
+     * Hahmon nopeus x-akselilla
+     */
     private int xNopeus;
+
+    /**
+     * Suunta johon pelaaja haluaa liikkua, eli mihin suuntaan pelaaja
+     * on painanut nappia
+     */
     private int xSuunta;
+    
+    /**
+     * Muuttuja joka antaa pelaajan vaikuttaa hypyn korkeuteen
+     */
     private int isoHyppy;
+    
+    /**
+     * Kuinka monta pikseliä/frame pelaajan hahmo putoaa y-akselilla
+     */
     private final int putoamiskiihtyvyysPerFrame;   // joopa
+    
+    /**
+     * Pelaajan putoamisen maksiminopeus, jonka saavutettuaan putoaminen
+     * ei enää kiihdy
+     */
     private final int terminaalinopeus;             // joo
+
+    /**
+     * Pelaajan hahmon korkeus pikseleinä
+     */
     private final int ukkelinKorkeus;               // heh
+    
+    /**
+     * Taso jolla pelaaja liikkuu
+     */
     private Taso taso;
+    
+    /**
+     * Mihin esteeseen pelaaja on osunut viimeksi
+     */
     private EsteenTyyppi osuikoJohonkin = null;     // dsfasd
 
     /**
-     * @param x
-     * @param y
+     * Konstruoidaan pelaaja ja laitetaan se parametrina annettuun tasoon.
+     * 
      * @param taso
      */
     public Pelaaja(Taso taso) {
-        super(0, 0);
+        super(taso.getPelaajanAlkusijainti().getX(),
+                taso.getPelaajanAlkusijainti().getY());
+        this.taso = taso;
         yNopeus = 0;
         xNopeus = 0;
         xSuunta = 0;
@@ -34,8 +75,6 @@ public class Pelaaja extends Piste {
         putoamiskiihtyvyysPerFrame = 1;
         terminaalinopeus = 50;
         ukkelinKorkeus = 32;
-        this.taso = taso;
-        this.setXY(taso.getPelaajanAlkusijainti());
     }
 
     public int getyNopeus() {
@@ -55,7 +94,10 @@ public class Pelaaja extends Piste {
     }
 
     /**
-     * Jumal-metodi
+     * Metodi jolla käynnistetään kaikki pelaajan logiikkaan liittyvät metodit.
+     * 
+     * @return osuikoJohonkin, josta metodia kutsuva pelilogiikka voi päätellä
+     * kuinka jatketaan
      */
     public EsteenTyyppi eksistoi() {
         liikuta();
@@ -64,38 +106,61 @@ public class Pelaaja extends Piste {
     }
 
     /**
-     * Metodi joka kutsutaan siinä vaiheessa kun hahmo ei ole hyppäämässä
-     * ylöspäin eli melkein aina.
-     *
-     * Siirtää hahmon nopeuden määrittämään pisteeseen. Mikäli pisteessä on
-     * este, metodi etsii sitä lähinnä olevan pisteen mihin voi siirtyä.
+     * Metodi joka säätelee pelaajan liikettä Y-akselilla.
      */
     private void lenna() {
+        /*
+         * Ehtolause joka käsittelee tilanteen jossa pelaaja pitää
+         * hyppynappia pohjassa
+         */
         if (isoHyppy > 0) {
             yNopeus = -10;
             isoHyppy--;
         }
-
+        /*
+         * Normaali tilanne
+         */
         if (yNopeus < terminaalinopeus && isoHyppy == 0) {
             yNopeus += putoamiskiihtyvyysPerFrame;
         }
-
+        /* 
+         * Testataan osuuko pelaaja maahan ja siirrellään sen mukaan
+         */
         this.siirra(0, testaaPisteYAkselilla(yNopeus));
     }
 
+    /**
+     * Metodi joka testaa onko hahmon reitillä Y-akselilla esteitä.
+     *
+     * @param nopeus hahmosta laskettuna etäisin testattava piste y-akselilla
+     * @return Y-koordinaatti johon hahmo voi siirtyä ilman että se osuu
+     * esteeseen (<= nopeus)
+     */
     private int testaaPisteYAkselilla(int nopeus) {
+
         // Aloitamme testaamisen hahmon vasemmasta laidasta
         Piste testattavaPiste = new Piste(this.getX() - 12, this.getY());
-
+ 
+        // Sisäkkäisten looppien keskeyttämistä varten
         boolean loytyiEste = false;
+       
+        // Iteraattori
         int yTestattava = 0;
+        
+        // Koodia selkeyttävä apumuuttuja
         int suunta = 1;
 
+        /* Jos hahmo liikkuu ylöspäin, hahmon korkeus on huomioitava koska
+         * nollapiste on hahmon jaloissa
+         */
         if (nopeus < 0) {
             testattavaPiste.siirra(0, -ukkelinKorkeus);
             suunta = -1;
         }
 
+        /* Testataan sekä hahmon vasen että oikea laita. So far ei liene
+         * mielekästä testata tämän suuremmalla resoluutiolla
+         */
         for (int i = 0; i < 2; i++) {
             while (Math.abs(yTestattava) < Math.abs(yNopeus)) {
                 // Siirretään pistettä y-akselilla
@@ -123,10 +188,12 @@ public class Pelaaja extends Piste {
         return yTestattava;
     }
 
+    /**
+     * Metodi joka testaa onko pisteessä este. Jos on, metodi säätää myös
+     * pelaajan attribuutin osuikoJohonkin vastaamaan esteen tyyppiä.
+     */
     private boolean testaaPiste(Piste piste) {
-        if (taso.onkoPisteessaEste(piste) == null) {
-            return false;
-        } else if (taso.onkoPisteessaEste(piste) == EsteenTyyppi.ESTE) {
+        if (taso.onkoPisteessaEste(piste) == EsteenTyyppi.ESTE) {
             return true;
         } else if (taso.onkoPisteessaEste(piste) == EsteenTyyppi.MAALI) {
             this.osuikoJohonkin = EsteenTyyppi.MAALI;
@@ -142,36 +209,37 @@ public class Pelaaja extends Piste {
         return osuikoJohonkin;
     }
 
+    /**
+     * Metodi joka käynnistää prosessin jonka seurauksena pelaajahahmo liikkuu
+     * oikeaan paikkaan X-akselilla.
+     */
     private void liikuta() {
         laskeUusiNopeus();
         this.siirra(testaaPisteXAkselilla(xNopeus), 0);
     }
 
-    /*
+    /**
      * Palauttaa lähimmän ei-este pisteen X-akselilla väliltä hahmon laita ja
-     * xNopeus.
+     * xNopeus. Toimii aikalailla kuten testaaPisteYAkselilla().
+     *
      */
     private int testaaPisteXAkselilla(int nopeus) {
 
-
+        // Iteraattori
         int xTestattava = 0;
         int suunta;
+
         int absNopeus = xNopeus;
-        boolean loytyikoEste = false;
 
         if (xNopeus > 0) {
             /* Emme käytä xSuuntaa, koska jos pelaaja haluaa liikkua oikealle
              * ja törmää vasemmalta puolelta seinään ennen kuin vauhti on nolla,
              * hahmo uppoaisi seinään. Sen sijaan kehitämme hahmon inertian 
-             * suunnalle oman näppärän muuttujan.
+             * suunnalle oman näppärän apumuuttujan.
              */
             suunta = 1;
-
-
-
         } else if (xNopeus < 0) {
-
-            // Tämän takia emme käyttäneet math.absia            
+            // Suunnan määrittämisen takia emme käyttäneet math.absia            
             absNopeus = Math.abs(xNopeus);
             suunta = -1;
         } else {
@@ -182,32 +250,23 @@ public class Pelaaja extends Piste {
         /* Koska kivitaulussa lukee, että hahmon leveys on 24 pixeliä, ja
          * meitä ei kiinnosta hahmon sisällä mahdollisesti majailevat esteet,
          */
-        Piste testattavaPiste = new Piste(this.getX() + 12 * suunta, this.getY() - ukkelinKorkeus);
-
-
-        /*
-         * Loopilla testaamme pikselit koko ukkelin korkeudelta 2px resoluutiolla.
-         */
-        while (testattavaPiste.getY() <= this.getY()) {
-            xTestattava = 0;
-            while (xTestattava < absNopeus) {
-                testattavaPiste.siirra(suunta, 0);
-
-                if (testaaPiste(testattavaPiste)) {
-                    loytyikoEste = true;
-                    break;
-                } else {
-                    xTestattava++;
-                }
-            }
-            if (loytyikoEste == true) {
+        Piste p0 = new Piste(this.getX() + 12 * suunta,
+                this.getY());
+        int esteenKorkeus = 0;
+        while (xTestattava < absNopeus) {
+            esteenKorkeus = testaaPystyrivi(p0);
+            if (esteenKorkeus > 0) {
                 break;
             }
-            testattavaPiste.setX(this.getX() + 12 * suunta);
-            testattavaPiste.siirra(0, 2);
+            p0.siirra(suunta, 0);
+            xTestattava++;
         }
-        if (loytyikoEste) {
-            if (testattavaPiste.getY() >= this.getY() - 2) {
+        p0.setX(this.getX() + 12 * suunta);
+        if (esteenKorkeus > 0) {
+            /* Erikoistapaus jossa hahmon kohtaama este on 2px korkea.
+             * Eli pelaaja pääsee yli matalista esteistä hyppäämättä.
+             */
+            if (esteenKorkeus < 3) {
                 this.yNopeus = -2;
             } else {
                 /* Jos este löytyy ja on korkea, hahmo pysähtyy kuin
@@ -215,55 +274,77 @@ public class Pelaaja extends Piste {
                  */
 
                 xNopeus = 0;
-                xSuunta = 0;
             }
         }
-        return xTestattava * suunta;
+        return (xTestattava-1) * suunta;
     }
 
+    /*
+     * Palauttaa esteen korkeuden
+     */
+    private int testaaPystyrivi(Piste p0) {
+        Piste p1 = new Piste(p0.getX(), p0.getY() - ukkelinKorkeus);
+        for (int i = 0; i < ukkelinKorkeus; i++) {
+            if (testaaPiste(p1)) {
+                break;
+            }
+            p1.siirra(0, 1);
+        }
+        return p0.getY()-p1.getY();
+    }
+
+    /**
+     * Metodi joka kutsutaan kun pelaaja painaa hyppynappia.
+     */
     public void aloitaHyppy() {
-        Piste testattavaPiste = new Piste(this.getX(), this.getY() + 1);
-        if (testaaPiste(testattavaPiste)) {
+        /* Testataan onko hahmon alla maata.
+         * 
+         */
+        Piste p0 = new Piste(this.getX() - 12, this.getY() + 1);
+        Piste p1 = new Piste(this.getX() + 12, this.getY() + 1);
+        if (testaaPiste(p0) || testaaPiste(p1)) {
+            /* 
+             * isoHyppy mahdollistaa hypyn korkeuden säätelyn siten, että
+             * pidempi painallus = korkeampi hyppy
+             */
             isoHyppy = 9;
         }
     }
 
-    /*
-     * Palauttaa erotuksen hahmon hotspotin ja maan väliltä
+    /**
+     * Metodi joka kutsutaan kun pelaaja vapauttaa hyppynapin.
      */
     public void pysaytaHyppy() {
         isoHyppy = 0;
     }
 
     /**
-     *
-     *
+     * Metodi joka käskee pelaajahahmoa aloittamaan liikkumisen vasemmalle.
      */
     public void liikuVasemmalle() {
         this.xSuunta = -1;
     }
 
     /**
-     *
-     *
+     * Metodi joka käskee pelaajahahmoa aloittamaan liikkumisen oikealle.
      */
     public void liikuOikealle() {
         this.xSuunta = 1;
     }
 
     /**
-     *
+     * Metodi joka käskee pelaajahahmoa pysäyttämään x-suuntaisen liikkeen.
      */
     public void pysaytaLiike() {
         this.xSuunta = 0;
     }
 
-    /*
-     * Metodi jolla lasketaan pelaajalle uusi x-nopeus riippuen hahmon nykyisestä
-     * xNopeudesta ja suunnasta.
-     * 
+    /**
+     * Metodi jolla lasketaan pelaajalle uusi x-nopeus riippuen hahmon
+     * nykyisestä xNopeudesta ja suunnasta.
+     *
      * Kiihtyvyyskerroin on mukana sen takia, että jos hahmo on ilmassa, sen
-     * liikuttelu on hitaampaa.
+     * liikuttelun tulee olla hitaampaa.
      */
     private void laskeUusiNopeus() {
 
@@ -292,9 +373,15 @@ public class Pelaaja extends Piste {
             // Hidastuminen kun mitään nappia ei paineta
         } else if (kiihtyvyyskerroin == 5 && xSuunta == 0) {
 
-            // Koska muutos on ±2, erikoistapauksessa kun nopeus on 1 tai -1
+            /**
+             * Erikoistapauksessa kun nopeus on 1 tai -1, nopeudeksi tulee 0
+             * jotta hahmo ei jäisi tärisemään paikoilleen : )
+             */
             if (xNopeus == 1 || xNopeus == -1) {
                 xNopeus = 0;
+                /*
+                 * Ja muussa tapauksessa nopeuden itseisarvoa vähennetään 3:lla.
+                 */
             } else if (xNopeus > 0) {
                 xNopeus -= 3;
             } else if (xNopeus < 0) {

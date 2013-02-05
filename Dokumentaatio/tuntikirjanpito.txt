@@ -35,3 +35,9 @@
 - Esteellä on nyt tyyppi (maali tai kuolo)
 - Maaliin pääsy vie seuraavalle tasolle
 
+5. 2. 2013: 2h
+- Jonkun verran Javadoccia
+- Luokkakaavio on nyt pelottavampi
+- Pari sekvenssikaaviota lisätty
+- Pelaajaa siistitty
+- Maalin pääsy ei viekään seuraavalle tasolle :D

@@ -17,7 +17,6 @@ import tasonLogiikka.Pelaaja;
 public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
-    private Kuuntelija kuuntelija;
     private Pelaaja pelaaja;
     private Kamera kamera;
 
@@ -29,14 +28,13 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         
-        frame = new JFrame("Otsikko");
+        frame = new JFrame("Itseironinen otsikko");
 
         frame.setPreferredSize(new Dimension(1024, 800));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         luoKomponentit(frame.getContentPane());
-
 
         frame.pack();
         frame.setVisible(true);

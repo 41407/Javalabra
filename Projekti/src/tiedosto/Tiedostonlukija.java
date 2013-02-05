@@ -12,13 +12,25 @@ import tasonLogiikka.Taso;
 import tasonLogiikka.TasonLuonti;
 
 /**
- *
+ * Luokka joka valmistelee rivit tiedostosta luokkaa TasonLuonti varten.
+ * 
  * @author 41407
  */
 public class Tiedostonlukija {
 
+    /**
+     * Käsiteltävä tiedosto
+     */
     private File tiedosto;
+    
+    /**
+     * Tiedostoa käsittelevä lukija
+     */
     private Scanner lukija;
+    
+    /**
+     * Tiedoston rivit
+     */
     private ArrayList<String> rivit;
 
     public Tiedostonlukija(String tiedostonnimi) throws Exception {
@@ -38,6 +50,11 @@ public class Tiedostonlukija {
         return rivit;
     }
 
+    /**
+     * Metodi joka käskee TasonLuontia kehittämään tason this.riveistä
+     * 
+     * @return 
+     */
     public Taso luoTaso() {
         TasonLuonti duunaasTaso = new TasonLuonti(rivit);
         return duunaasTaso.getTaso();

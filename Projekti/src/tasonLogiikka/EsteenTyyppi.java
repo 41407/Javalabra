@@ -5,7 +5,7 @@
 package tasonLogiikka;
 
 /**
- *
+ * 
  * @author jiji
  */
 public enum EsteenTyyppi {

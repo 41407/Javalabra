@@ -5,7 +5,7 @@
 package grafiikka;
 
 /**
- *
+ * 
  * @author jiji
  */
 import java.awt.Color;

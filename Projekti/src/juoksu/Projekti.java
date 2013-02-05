@@ -10,7 +10,8 @@ import javax.swing.SwingUtilities;
 import tasonLogiikka.Pelaaja;
 
 /**
- *
+ * Turhahko main-luokka
+ * 
  * @author 41407
  */
 public class Projekti {

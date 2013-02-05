@@ -8,21 +8,32 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import tasonLogiikka.Pelaaja;
 
+/**
+ * Näppäimistön kuuntelija.
+ * 
+ * @author 41407
+ */
 public class Kuuntelija implements KeyListener {
 
+    /**
+     * Käsiteltävä pelaaja
+     */
     private Pelaaja pelaaja;
+
+    /**
+     * Muuttuja joka pitää kirjaa ensiksi painetusta suuntanapista
+     */
     private Painike ensiksiPainettu = Painike.NULL;
+    
+    /**
+     * Nappien tilasta kirjaa pitävät booleanit
+     */
     private boolean vasen = false;
     private boolean oikea = false;
     private boolean hyppy = false;
 
     public Kuuntelija(Pelaaja pelaaja) {
         this.pelaaja = pelaaja;
-    }
-
-    @Override
-    public void keyTyped(KeyEvent ke) {
-        // Liepä turha metodi!
     }
 
     /**
@@ -103,5 +114,10 @@ public class Kuuntelija implements KeyListener {
         } else {
             pelaaja.pysaytaHyppy();
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        // TUrha metodi.
     }
 }

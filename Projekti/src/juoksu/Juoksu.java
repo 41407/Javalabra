@@ -15,16 +15,22 @@ import tasonLogiikka.Taso;
 import tiedosto.Tiedostonlukija;
 
 /**
+ * Pelin keskeisen logiikan käynnistävä ja hallinnoiva luokka
  *
  * @author 41407
  */
 public class Juoksu {
 
+    /**
+     * Pelaajahahmo jota käsitellään
+     */
     private Pelaaja pelaaja;
+    /**
+     * Pelaajahahmoon liitettävä kameraolio
+     */
     private Kamera kamera;
 
     public Juoksu() {
-
         juokse();
     }
 
@@ -54,8 +60,9 @@ public class Juoksu {
      */
     public void juokse() {
         int i = 0;
+
+        initialisoiSysteemit(i);
         while (true) {
-            initialisoiSysteemit(i);
 
             while (true) {
 

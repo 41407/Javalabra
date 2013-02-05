@@ -7,12 +7,20 @@ package tasonLogiikka;
 import java.util.ArrayList;
 
 /**
- *
+ * Luokka jolla muutetaan stringeistä koostuva arraylist tasoksi.
+ * 
  * @author 41407
  */
 public class TasonLuonti {
 
+    /**
+     * Käsiteltävät rivit
+     */
     private ArrayList<String> rivit;
+
+    /**
+     * Taso jonka kanssa työskennellään ja joka lopuksi palautetaan
+     */
     private Taso taso;
 
     public TasonLuonti(ArrayList<String> rivit) {

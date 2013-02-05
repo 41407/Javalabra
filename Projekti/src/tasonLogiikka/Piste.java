@@ -19,7 +19,7 @@ public class Piste {
     }
 
     /**
-     * Konstruoi määrittelemätön piste
+     * Konstruoi piste jonka sijainti on (0,0)
      */
     public Piste() {
         this.x = 0;
@@ -51,14 +51,29 @@ public class Piste {
         this.y += dy;
     }
 
+    /**
+     * Aseta pisteen x-sijainti suoraan
+     * 
+     * @param x 
+     */
     public void setX(int x) {
         this.x = x;
     }
 
+    /**
+     * Aseta pisteen y-sijainti suoraan
+     * 
+     * @param y 
+     */
     public void setY(int y) {
         this.y = y;
     }
     
+    /**
+     * Aseta pisteen x ja y -sijainti suoraan
+     * 
+     * @param piste 
+     */
     public void setXY(Piste piste) {
         this.x = piste.getX();
         this.y = piste.getY();
