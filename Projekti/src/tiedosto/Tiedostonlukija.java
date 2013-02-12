@@ -60,7 +60,7 @@ public class Tiedostonlukija {
     /**
      * Metodi joka käskee TasonLuontia kehittämään tason this.riveistä
      * 
-     * @return 
+     * @return Palauttaa luodun tason.
      */
     public Taso luoTaso() {
         TasonLuonti tasonLuonti = new TasonLuonti(rivit);

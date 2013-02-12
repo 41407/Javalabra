@@ -10,12 +10,17 @@ ns. tuntumaan, olen testannut ja testaan mm. seuraavia asioita käsin:
 - Hahmon hypyn korkeuteen voi vaikuttaa pitämällä hyppynappia pohjassa
   vähemmän aikaa
 - Hahmo ei uppoa seiniin eikä lattiaan
+- Kamera seuraa hahmoa luontevasti
+
+- Taso vaihtuu sujuvasti
 
 - Piirtäjän piirtämät muodot vastaavat haluttua
 - Taso piirtyy oikein
 - Hahmo piirtyy oikein
 - Asiat liikkuvat näytöllä
+- Tausta on kivan näköinen
 
 - Näppäimistö ja näppäinten painallukset toimivat
 - Hahmolla kääntyminen onnistuu pätevästi
 - Hypyn korkeuteen voi vaikuttaa
+- Seinähyppy toimii

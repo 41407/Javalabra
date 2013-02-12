@@ -89,7 +89,8 @@ public class Pelaaja extends Piste {
     /**
      * Asettaa tason pelaajalle, ja siirtää pelaajan tason määrittämään
      * aloituspaikkaan. Myös resetoi osuikoJohonkinnin just in case.
-     * @param taso 
+     *
+     * @param taso
      */
     public void setTaso(Taso taso) {
         this.taso = taso;
@@ -163,10 +164,10 @@ public class Pelaaja extends Piste {
         }
 
         /**
-         * Looppi joka käy läpi välin hahmon sijainti - hahmon nopeuden
-         * saneleva sijainti. Iteraattori yTestattava saa arvon joka on lähinnä
-         * pelaajaa oleva paikka johon on mahdollista siirtyä, joka on väliltä
-         * 0 ... yNopeus
+         * Looppi joka käy läpi välin hahmon sijainti - hahmon nopeuden saneleva
+         * sijainti. Iteraattori yTestattava saa arvon joka on lähinnä pelaajaa
+         * oleva paikka johon on mahdollista siirtyä, joka on väliltä 0 ...
+         * yNopeus
          */
         while (yTestattava <= Math.abs(this.yNopeus)) {
             if (testaaVaakarivi(testattavaPiste)) {
@@ -260,9 +261,9 @@ public class Pelaaja extends Piste {
          * meitä ei kiinnosta hahmon sisällä mahdollisesti majailevat esteet,
          */
         Piste p0 = new Piste(this.getX() + 12 * suunta, this.getY());
-        
+
         int esteenKorkeus = 0;
-        
+
         while (xTestattava < absNopeus) {
             esteenKorkeus = testaaPystyrivi(p0);
             if (esteenKorkeus > 0) {
@@ -290,8 +291,7 @@ public class Pelaaja extends Piste {
     }
 
     /**
-     * Ottaa testattavan pystyrivin ylälaidan.
-     * Palauttaa esteen korkeuden.
+     * Ottaa testattavan pystyrivin ylälaidan. Palauttaa esteen korkeuden.
      * Testaa koko hahmon korkeudelta
      */
     private int testaaPystyrivi(Piste p0) {
@@ -330,8 +330,8 @@ public class Pelaaja extends Piste {
             /**
              * Testataan onnistuuko seinähyppy
              *
-             * Kommentoidut osiot olivat kokeilu joista en tykännyt.
-             * Ne nyt on siellä jostain syystä vielä tallella :)
+             * Kommentoidut osiot olivat kokeilu joista en tykännyt. Ne nyt on
+             * siellä jostain syystä vielä tallella :)
              */
             if (testaaPystyrivi(p0) > 0 /*&& this.xSuunta == -1*/) {
                 isoHyppy = 9;
@@ -379,12 +379,21 @@ public class Pelaaja extends Piste {
      * liikuttelun tulee olla hitaampaa.
      */
     private void laskeUusiNopeus() {
+        int kiihtyvyyskerroin = 1;
 
         // Hahmon sivuttaiskiihtyvyys pikseliä/frame kun se on maassa
-        int kiihtyvyyskerroin = 5;
-
-        // Hahmon sivuttaiskiihtyvyys kun se on ilmassa
-        if (yNopeus != 0) {
+        if (yNopeus == 0) {
+            kiihtyvyyskerroin = 5;
+            /**
+             * Nopeuden rajoitus
+             */
+            if (xNopeus > 10) {
+                xNopeus = 10;
+            } else if (xNopeus < -10) {
+                xNopeus = -10;
+            }
+        } else // Hahmon sivuttaiskiihtyvyys kun se on ilmassa
+        {
             kiihtyvyyskerroin = 1;
         }
 
@@ -393,8 +402,6 @@ public class Pelaaja extends Piste {
             // Maksiminopeus 10 px/f
             if (xNopeus < 10) {
                 xNopeus += kiihtyvyyskerroin;
-            } else {
-                xNopeus--;
             }
 
             // Liikuttaessa vasemmalle
@@ -402,8 +409,6 @@ public class Pelaaja extends Piste {
             // Maksiminopeus 10 px/f
             if (xNopeus > -10) {
                 xNopeus -= kiihtyvyyskerroin;
-            } else {
-                xNopeus++;
             }
 
             // Hidastuminen kun mitään nappia ei paineta
@@ -424,6 +429,7 @@ public class Pelaaja extends Piste {
                 xNopeus += 3;
             }
         }
+
     }
 }
 

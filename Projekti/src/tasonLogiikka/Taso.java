@@ -67,9 +67,7 @@ public class Taso {
     }
 
     /**
-     * Palauttaa arraylistinä tasoon kuuluvat esteet.
-     *
-     * @return
+     * @return Tasoon kuuluvat esteet arraylistinä.
      */
     public ArrayList<Este> getEsteet() {
         return esteet;

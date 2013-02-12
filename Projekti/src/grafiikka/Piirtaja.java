@@ -88,7 +88,10 @@ public class Piirtaja {
      */
     private void piirraEste(Graphics graphics, Este este) {
         if (este.getTyyppi() == EsteenTyyppi.KUOLO) {
-            graphics.setColor(new Color(64, 0, 0));
+            /**
+             * Kuolonpalikka VILKKUU 30 kertaa sekunnissa! >:(
+             */
+            graphics.setColor(new Color(255 * System.currentTimeMillis() / 30 % 2, 0, 0));
         } else {
             graphics.setColor(new Color(20, 20, 20));
         }
@@ -114,22 +117,21 @@ public class Piirtaja {
          * En nähnyt tarpeelliseksi generoida loputonta viivakenttää tässä
          * vaiheessa
          */
-        
         /**
          * Vaakaraita
          */
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             graphics.setColor(new Color(
                     Math.max(0, 255 - i * 4),
                     Math.max(0, 255 - i * 8),
                     Math.max(0, 255 - i * 4)));
             graphics.fillRect(0, -kamera.getY() / 5 + i * 180 + 100, 1024, 100);
         }
-        
+
         /**
          * Toinen vaakaraita!
          */
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             graphics.setColor(new Color(
                     Math.max(0, 255 - i * 4),
                     Math.max(0, 255 - i * 4),
@@ -140,7 +142,7 @@ public class Piirtaja {
         /**
          * Nooooh pistetään nty vielä opaquoottinen pystyraita!!!1
          */
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             graphics.setColor(new Color(
                     Math.max(0, 255 - i * 4),
                     Math.max(0, 255 - i * 4),

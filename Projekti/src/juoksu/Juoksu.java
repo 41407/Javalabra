@@ -77,7 +77,7 @@ public class Juoksu {
          * Sijoitetaan kamera sweet spottiin
          */
         this.kamera.setXY(new Piste(pelaaja.getTaso().getPelaajanAlkusijainti().getX() - 405,
-                pelaaja.getTaso().getPelaajanAlkusijainti().getY()-900));
+                pelaaja.getTaso().getPelaajanAlkusijainti().getY()-1000));
 
         /**
          * Määritetään uusi taso + siihen liittyvät systeemit ikkunan uudeksi sisällöksi

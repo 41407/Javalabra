@@ -54,7 +54,6 @@ public class TasonLuonti {
     }
 
     public Taso getTaso() {
-        System.out.println(taso.getEsteet());
         return taso;
     }
 

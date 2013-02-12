@@ -52,4 +52,9 @@ En muistanut pitää kirjaa muutamista aiemmista koodailusessiosta!
 - Pelaajan x-suuntainen nopeus lienee nyt paremmin käsitelty
 - Tason taustaan piirtyy nyt kivoja tsykedeelisiä kuvioita
 - Hahmon väri muutettu : o
+- Lisää tasoja
+- Lisää javadoccia
+
+
+
 
