@@ -44,7 +44,6 @@ public class Piirtaja {
         piirraTausta(graphics);
         piirraPelaaja(graphics);
         piirraTaso(graphics, pelaaja.getTaso());
-
     }
 
     /**
@@ -96,28 +95,36 @@ public class Piirtaja {
 
     /**
      * Koska valkoinen ei riitä
-     * 
-     * @param graphics 
+     *
+     * @param graphics
      */
     private void piirraTausta(Graphics graphics) {
-
         /**
-         * Ao. yhtälöissä jakolasku johtuu siitä että halajamme viivoihin
-         * mageen parallaksiefektin.
+         * Ao. yhtälöissä jakolasku johtuu siitä että halajamme viivoihin mageen
+         * parallaksiefektin.
+         *
+         * Ja jooooo for-looppi on kovakoodattu, eli jos pelaaja menee tarpeeksi
+         * kauas vasemmalle, oikealle, ylös tai alas, viivat loppuvat. En nähnyt
+         * tarpeelliseksi generoida loputonta viivakenttää tässä vaiheessa
          */
-        
         /**
          * Vaakaraita
          */
         for (int i = 0; i < 20; i++) {
-            graphics.setColor(new Color(210, 210 - i * 2, 210));
+            graphics.setColor(new Color(
+                    Math.max(0, 255 - i * 4),
+                    Math.max(0, 255 - i * 8),
+                    Math.max(0, 255 - i * 4)));
             graphics.fillRect(0, -kamera.getY() / 5 + i * 180 + 100, 1024, 100);
         }
         /**
          * Toinen vaakaraita!
          */
         for (int i = 0; i < 20; i++) {
-            graphics.setColor(new Color(230 - i * 3, 230, 230));
+            graphics.setColor(new Color(
+                    Math.max(0, 255 - i * 8),
+                    Math.max(0, 230 - i * 4),
+                    Math.max(0, 230 - i * 4)));
             graphics.fillRect(0, -kamera.getY() / 4 + i * 180 + 100, 1024, 80);
         }
 
@@ -125,7 +132,11 @@ public class Piirtaja {
          * Nooooh pistetään nty vielä pystyraita!!!1
          */
         for (int i = 0; i < 20; i++) {
-            graphics.setColor(new Color(240, 240, 240 - i * 4));
+            graphics.setColor(new Color(
+                    Math.max(0, 255 - i * 4),
+                    Math.max(0, 255 - i * 4),
+                    Math.max(0, 255 - i * 8),
+                    128));
             graphics.fillRect(-kamera.getX() / 20 + i * 200, 0, 100, 800);
         }
     }

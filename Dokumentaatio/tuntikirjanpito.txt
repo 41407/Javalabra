@@ -41,3 +41,15 @@
 - Pari sekvenssikaaviota lisätty
 - Pelaajaa siistitty
 - Maalin pääsy ei viekään seuraavalle tasolle :D
+
+12. 2. 2013: 5h?
+En muistanut pitää kirjaa muutamista aiemmista koodailusessiosta!
+- Tason vaihto toimii ilman että käyttöliittymä aukaisee uuden ikkunan
+- Yllä mainitusta ja muista syistä peli vie paljon vähemmän tehoja nyt
+- Pelaaja voi suorittaa nk. seinähypyn
+- Tähän vähän liittyen pelaajan käyttäytymistä lennon aikana hiottu
+- Pelaajan y-suuntainen törmäysdetektio on nyt paljon luotettavampi ja siistimmin koodattu
+- Pelaajan x-suuntainen nopeus lienee nyt paremmin käsitelty
+- Tason taustaan piirtyy nyt kivoja tsykedeelisiä kuvioita
+- Hahmon väri muutettu : o
+

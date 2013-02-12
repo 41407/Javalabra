@@ -62,7 +62,7 @@ public class Juoksu {
             }
         }
 
-        this.kamera.setXY(new Piste(pelaaja.getTaso().getPelaajanAlkusijainti().getX()-405,
+        this.kamera.setXY(new Piste(pelaaja.getTaso().getPelaajanAlkusijainti().getX() - 405,
                 pelaaja.getTaso().getPelaajanAlkusijainti().getY()));
         this.kamera.seuraa(pelaaja);
 

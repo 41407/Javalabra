@@ -312,10 +312,10 @@ public class Pelaaja extends Piste {
             /**
              * Testataan onnistuuko seinähyppy
              */
-            if (testaaPystyrivi(p0) > 0 && this.xSuunta == -1) {
+            if (testaaPystyrivi(p0) > 0 /*&& this.xSuunta == -1*/) {
                 isoHyppy = 9;
                 xNopeus = 15;
-            } else if (testaaPystyrivi(p1) > 0 && this.xSuunta == 1) {
+            } else if (testaaPystyrivi(p1) > 0 /*&& this.xSuunta == 1*/) {
                 isoHyppy = 9;
                 xNopeus = -15;
             }
