@@ -5,7 +5,8 @@
 package grafiikka;
 
 /**
- *
+ * Enumeraattori joka selkeyttää Kuuntelijan koodia.
+ * 
  * @author 41407
  */
 public enum Painike {

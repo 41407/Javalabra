@@ -30,70 +30,118 @@ public class Juoksu {
      * Pelaajahahmoon liitettävä kameraolio
      */
     private Kamera kamera;
-    private Ikkuna kayttoliittyma;
+    
+    /**
+     * Peli-ikkuna
+     */
+    private Ikkuna ikkuna;
 
     public Juoksu() {
         this.pelaaja = new Pelaaja();
         this.kamera = new Kamera(0, 0);
-        this.kayttoliittyma = new Ikkuna(pelaaja, kamera);
+        this.ikkuna = new Ikkuna(pelaaja, kamera);
         juokse();
     }
 
     /**
-     * Iskee tulille leveelin ja käyttöliittymän
+     * Iskee tulille tason ja käyttöliittymän
      */
-    public void initialisoiSysteemit(int i) {
-        initialisoiTaso(i);
-        SwingUtilities.invokeLater(kayttoliittyma);
-
+    public void alustaIkkuna(int i) {
+        alustaTaso(i);
+        SwingUtilities.invokeLater(ikkuna);
     }
 
-    private void initialisoiTaso(int i) {
+    private void alustaTaso(int i) {
+        /**
+         * Tason lukeminen ja parsiminen tiedostosta, ja sen asettaminen
+         * pelaajalle
+         */
         try {
             Tiedostonlukija lukija = new Tiedostonlukija("src/" + i + ".txt");
             this.pelaaja.setTaso(lukija.luoTaso());
         } catch (Exception ex) {
-            Tiedostonlukija lukija;
+            /**
+             * Jos tasot loppuvat, gg.txt :D
+             */
             try {
-                lukija = new Tiedostonlukija("src/gg.txt");
+                Tiedostonlukija lukija = new Tiedostonlukija("src/gg.txt");
                 this.pelaaja.setTaso(lukija.luoTaso());
             } catch (Exception ex1) {
+                /**
+                 * Jos gg.txt loppuu, exception :(
+                 */
                 Logger.getLogger(Juoksu.class.getName()).log(Level.SEVERE, null, ex1);
             }
         }
-
+        /**
+         * Sijoitetaan kamera sweet spottiin
+         */
         this.kamera.setXY(new Piste(pelaaja.getTaso().getPelaajanAlkusijainti().getX() - 405,
-                pelaaja.getTaso().getPelaajanAlkusijainti().getY()));
-        this.kamera.seuraa(pelaaja);
+                pelaaja.getTaso().getPelaajanAlkusijainti().getY()-900));
 
-        this.kayttoliittyma.setPiirtoalusta(new Piirtoalusta(pelaaja, kamera));
+        /**
+         * Määritetään uusi taso + siihen liittyvät systeemit ikkunan uudeksi sisällöksi
+         */
+        this.ikkuna.setPiirtoalusta(new Piirtoalusta(pelaaja, kamera));
     }
 
     /**
      * Pääluuppi
      */
     public void juokse() {
-        int i = 0;
-        initialisoiSysteemit(i);
-
+        /**
+         * Ladattavan tason määrittävä iteraattori
+         */
+        int tasonNumero = 0;
+        
+        /**
+         * Valmistellaan ikkuna
+         */
+        alustaIkkuna(tasonNumero);
+        
+        /**
+         * Luuppi joka tapahtuu niin kauan kuin tasoja riittää
+         */
         while (true) {
+            /**
+             * Luuppi joka tapahtuu niin kauan kuin pelaaja pysyy hengissä
+             * tai ei ole läpäissyt tasoa
+             */
             while (true) {
+                /**
+                 * 60fps get
+                 */
                 try {
                     Thread.sleep(16);
                 } catch (InterruptedException ex) {
                     System.out.println("joku meni vituiks :D");
                 }
+                /**
+                 * Pelaajan päivitys
+                 */
                 pelaaja.eksistoi();
+                /**
+                 * Kameran päivitys
+                 */
                 kamera.seuraa(pelaaja);
+                /**
+                 * Tason lopettamisen määrittävä ehtolause
+                 */
                 if (pelaaja.getOsuikoJohonkin() == EsteenTyyppi.MAALI) {
-                    i++;
+                    tasonNumero++;
                     break;
                 } else if (pelaaja.getOsuikoJohonkin() == EsteenTyyppi.KUOLO) {
                     break;
                 }
-                this.kayttoliittyma.repaint();
+                /**
+                 * Grafiikan päivitys
+                 */
+                this.ikkuna.repaint();
             }
-            initialisoiTaso(i);
+            /**
+             * Tason alu-
+             */
+            alustaTaso(tasonNumero);
         }
     }
 }

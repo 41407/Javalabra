@@ -5,14 +5,28 @@
 package tasonLogiikka;
 
 /**
- *
+ * Piste. Sillä on x ja y. Sitä voi liikuttaa. Sitä voi käskeä menemään
+ * tiettyyn......
+ * 
+ *                                          ........pisteeseen
+ * 
  * @author 41407
  */
 public class Piste {
-
+    /**
+     * Pisteen sijainti vaakasuunnassa eli x
+     */
     private int x;
+    /**
+     * Pisteen sijainti pystysuunnassa eli y. Mielenkiintoisesti sanoissa
+     * pystysuunnassa ja
+     * vaakasuunnassa on sama määrä kirjaimia!
+     */
     private int y;
 
+    /**
+     * Lähinnä virheiden etsimistä varten overridetty
+     */
     @Override
     public String toString() {
         return "(" + x + ", " + y + ")";
@@ -70,7 +84,7 @@ public class Piste {
     }
     
     /**
-     * Aseta pisteen x ja y -sijainti suoraan
+     * Aseta pisteen x ja y -sijainti suoraan antamalla Piste
      * 
      * @param piste 
      */

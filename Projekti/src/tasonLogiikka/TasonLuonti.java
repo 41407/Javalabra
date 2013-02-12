@@ -7,7 +7,7 @@ package tasonLogiikka;
 import java.util.ArrayList;
 
 /**
- * Luokka jolla muutetaan stringeistä koostuva arraylist tasoksi.
+ * Luokka jolla muutetaan stringeistä koostuva arraylist tasoksi
  * 
  * @author 41407
  */
@@ -23,12 +23,21 @@ public class TasonLuonti {
      */
     private Taso taso;
 
+    /**
+     * Konstruktori luo tason samantien sille syötetyistä riveistä.
+     * 
+     * @param rivit 
+     */
     public TasonLuonti(ArrayList<String> rivit) {
         this.rivit = rivit;
         this.taso = new Taso();
         teeTaso();
     }
 
+    /**
+     * Metodi joka käy läpi arraylistan rivit ja selvittää mitä niille pitää
+     * tehdä.
+     */
     private void teeTaso() {
         for (String string : rivit) {
             char etumerkki = string.toUpperCase().charAt(0);
@@ -49,7 +58,7 @@ public class TasonLuonti {
         return taso;
     }
 
-    /*
+    /**
      * Välivaiheet eroteltu selkeyden vuoksi.
      */
     private void esteRivi(String string, EsteenTyyppi tyyppi) {
@@ -67,7 +76,7 @@ public class TasonLuonti {
     }
 
     private ArrayList<Integer> stringKoordinaateiksi(String string) {
-        /* 
+        /** 
          * Alotetaan string[2]:sta koska ekat 2 merkkiä on E ja spacebar
          */
         ArrayList<Integer> koordinaatit = new ArrayList();

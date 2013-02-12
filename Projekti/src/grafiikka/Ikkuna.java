@@ -14,6 +14,12 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import tasonLogiikka.Pelaaja;
 
+
+/**
+ * Ikkuna extendoi JFramen jotta sille voi sanoa repaint();
+ * 
+ * @author 41407
+ */
 public class Ikkuna extends JFrame implements Runnable {
 
     private Pelaaja pelaaja;
@@ -36,7 +42,6 @@ public class Ikkuna extends JFrame implements Runnable {
 
         this.pack();
         this.setVisible(true);
-
     }
 
     private void luoKomponentit(Container container) {

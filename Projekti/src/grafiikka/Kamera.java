@@ -8,7 +8,9 @@ import tasonLogiikka.Pelaaja;
 import tasonLogiikka.Piste;
 
 /**
- * Dynaamisen kuvakulman toteuttava luokka
+ * Dynaamisen kuvakulman toteuttava luokka. Käytännössä Piste, jolle tehdään
+ * erinäisiä laskutoimituksia ja jonka x- ja y-arvoja käytetään sen
+ * määrittelyssä, mihin kohtaan näyttöä tason ominaisuudet piirretään.
  *
  * @author 41407
  */
@@ -26,7 +28,11 @@ public class Kamera extends Piste {
     public Kamera(int x, int y) {
         super(x, y);
         xNopeus = 0;
-        yNopeus = 0;
+        /**
+         * Alkunopeus on säädetty 50:een, koska pelaaja aloittaa tason
+         * putoamalla.
+         */
+        yNopeus = 50;
     }
 
     /**
@@ -45,16 +51,20 @@ public class Kamera extends Piste {
 
         /**
          * Tämän rivin seurauksena kamera saavuttaa pelaajan x-akselilla 15
-         * framen aikana
+         * framen aikana, jos pelaaja pysyy paikallaan
          */
         xNopeus = xDelta / 15;
 
         /**
          * Seuraamme pelaajaa y-akselilla vähän hitaammin koska hyppiminen on
-         * niin äkkinäinen liike.
+         * niin äkkinäinen liike. Myös artistinen valinta, että nopeasti putoava
+         * pelaaja häviää kuvasta.
          */
-        yNopeus = yDelta / 30;
+        yNopeus = yDelta / 20;
 
+        /**
+         * Itse siirtometodin kutsu.
+         */
         this.siirra(xNopeus, yNopeus);
     }
 }

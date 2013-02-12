@@ -32,16 +32,16 @@ public class Pelaaja extends Piste {
     /**
      * Kuinka monta pikseliä/frame pelaajan hahmo putoaa y-akselilla
      */
-    private final int putoamiskiihtyvyysPerFrame;   // joopa
+    private final int putoamiskiihtyvyysPerFrame;
     /**
      * Pelaajan putoamisen maksiminopeus, jonka saavutettuaan putoaminen ei enää
      * kiihdy
      */
-    private final int terminaalinopeus;             // joo
+    private final int terminaalinopeus;
     /**
      * Pelaajan hahmon korkeus pikseleinä
      */
-    private final int ukkelinKorkeus;               // heh
+    private final int hahmonKorkeus;
     /**
      * Taso jolla pelaaja liikkuu
      */
@@ -49,20 +49,25 @@ public class Pelaaja extends Piste {
     /**
      * Mihin esteeseen pelaaja on osunut viimeksi
      */
-    private EsteenTyyppi osuikoJohonkin = null;     // dsfasd
+    private EsteenTyyppi osuikoJohonkin = null;
 
     /**
      * Konstruoidaan pelaaja
+     *
      */
     public Pelaaja() {
         super(0, 0);
-        yNopeus = 0;
         xNopeus = 0;
         xSuunta = 0;
         isoHyppy = 0;
         putoamiskiihtyvyysPerFrame = 1;
         terminaalinopeus = 50;
-        ukkelinKorkeus = 32;
+        /**
+         * Nopeudeksi määritetään terminaalinopeus, koska jos pelaaja alottaa
+         * ilmasta, haluamme sen putoavan täysiiiiiii
+         */
+        yNopeus = terminaalinopeus;
+        hahmonKorkeus = 32;
     }
 
     public int getyNopeus() {
@@ -81,6 +86,11 @@ public class Pelaaja extends Piste {
         return taso;
     }
 
+    /**
+     * Asettaa tason pelaajalle, ja siirtää pelaajan tason määrittämään
+     * aloituspaikkaan. Myös resetoi osuikoJohonkinnin just in case.
+     * @param taso 
+     */
     public void setTaso(Taso taso) {
         this.taso = taso;
         this.setXY(taso.getPelaajanAlkusijainti());
@@ -105,7 +115,7 @@ public class Pelaaja extends Piste {
     private void lenna() {
         /*
          * Ehtolause joka käsittelee tilanteen jossa pelaaja pitää
-         * hyppynappia pohjassa
+         * hyppynappia pohjassa hypätäkseen korkeammalle
          */
         if (isoHyppy > 0) {
             yNopeus = -10;
@@ -148,10 +158,16 @@ public class Pelaaja extends Piste {
          * nollapiste on hahmon jaloissa
          */
         if (nopeus < 0) {
-            testattavaPiste.siirra(0, -ukkelinKorkeus);
+            testattavaPiste.siirra(0, -hahmonKorkeus);
             suunta = -1;
         }
 
+        /**
+         * Looppi joka käy läpi välin hahmon sijainti - hahmon nopeuden
+         * saneleva sijainti. Iteraattori yTestattava saa arvon joka on lähinnä
+         * pelaajaa oleva paikka johon on mahdollista siirtyä, joka on väliltä
+         * 0 ... yNopeus
+         */
         while (yTestattava <= Math.abs(this.yNopeus)) {
             if (testaaVaakarivi(testattavaPiste)) {
                 this.yNopeus = 0;
@@ -168,7 +184,7 @@ public class Pelaaja extends Piste {
      * este.
      *
      * @param p0 Testattavan rivin vasen laita
-     * @return
+     * @return true jos pisteessä on este, false jos ei.
      */
     private boolean testaaVaakarivi(Piste p0) {
         Piste p1 = new Piste(p0.getX(), p0.getY());
@@ -243,9 +259,10 @@ public class Pelaaja extends Piste {
         /* Koska kivitaulussa lukee, että hahmon leveys on 24 pixeliä, ja
          * meitä ei kiinnosta hahmon sisällä mahdollisesti majailevat esteet,
          */
-        Piste p0 = new Piste(this.getX() + 12 * suunta,
-                this.getY());
+        Piste p0 = new Piste(this.getX() + 12 * suunta, this.getY());
+        
         int esteenKorkeus = 0;
+        
         while (xTestattava < absNopeus) {
             esteenKorkeus = testaaPystyrivi(p0);
             if (esteenKorkeus > 0) {
@@ -272,12 +289,14 @@ public class Pelaaja extends Piste {
         return (xTestattava - 1) * suunta;
     }
 
-    /*
-     * Palauttaa esteen korkeuden
+    /**
+     * Ottaa testattavan pystyrivin ylälaidan.
+     * Palauttaa esteen korkeuden.
+     * Testaa koko hahmon korkeudelta
      */
     private int testaaPystyrivi(Piste p0) {
-        Piste p1 = new Piste(p0.getX(), p0.getY() - ukkelinKorkeus);
-        for (int i = 0; i < ukkelinKorkeus; i++) {
+        Piste p1 = new Piste(p0.getX(), p0.getY() - hahmonKorkeus);
+        for (int i = 0; i < hahmonKorkeus; i++) {
             if (testaaPiste(p1)) {
                 break;
             }
@@ -290,13 +309,14 @@ public class Pelaaja extends Piste {
      * Metodi joka kutsutaan kun pelaaja painaa hyppynappia.
      */
     public void aloitaHyppy() {
-        /* Testataan onko hahmon alla maata.
-         * 
+        /**
+         * Testataan onko hahmon alla maata. Aloitetaan hahmon vasemmasta
+         * laidasta
          */
         Piste p0 = new Piste(this.getX() - 12, this.getY() + 1);
 
         if (testaaVaakarivi(p0)) {
-            /* 
+            /**
              * isoHyppy mahdollistaa hypyn korkeuden säätelyn siten, että
              * pidempi painallus = korkeampi hyppy
              */
@@ -307,10 +327,11 @@ public class Pelaaja extends Piste {
         } else {
             p0.siirra(-1, 0);
             Piste p1 = new Piste(p0.getX() + 26, p0.getY());
-
-
             /**
              * Testataan onnistuuko seinähyppy
+             *
+             * Kommentoidut osiot olivat kokeilu joista en tykännyt.
+             * Ne nyt on siellä jostain syystä vielä tallella :)
              */
             if (testaaPystyrivi(p0) > 0 /*&& this.xSuunta == -1*/) {
                 isoHyppy = 9;
@@ -405,3 +426,7 @@ public class Pelaaja extends Piste {
         }
     }
 }
+
+/**
+ * Se oli siinä!
+ */

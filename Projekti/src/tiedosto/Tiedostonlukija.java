@@ -33,14 +33,21 @@ public class Tiedostonlukija {
      */
     private ArrayList<String> rivit;
 
+    /**
+     * Konstruktorissa Tiedostonlukija ottaa tiedoston saman tien talteen
+     * oliomuuttujaansa.
+     * 
+     * @param tiedostonnimi
+     * @throws Exception 
+     */
     public Tiedostonlukija(String tiedostonnimi) throws Exception {
         this.tiedosto = new File(tiedostonnimi);
         lukija = new Scanner(tiedosto);
         this.rivit = new ArrayList();
         rivitTalteen();
     }
-
-    public void rivitTalteen() {
+    
+    private void rivitTalteen() {
         while (lukija.hasNext()) {
             rivit.add(lukija.nextLine());
         }
@@ -56,7 +63,7 @@ public class Tiedostonlukija {
      * @return 
      */
     public Taso luoTaso() {
-        TasonLuonti duunaasTaso = new TasonLuonti(rivit);
-        return duunaasTaso.getTaso();
+        TasonLuonti tasonLuonti = new TasonLuonti(rivit);
+        return tasonLuonti.getTaso();
     }
 }

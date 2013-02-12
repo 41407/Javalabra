@@ -10,7 +10,7 @@ import tasonLogiikka.Pelaaja;
 
 /**
  * Näppäimistön kuuntelija.
- * 
+ *
  * @author 41407
  */
 public class Kuuntelija implements KeyListener {
@@ -19,18 +19,21 @@ public class Kuuntelija implements KeyListener {
      * Käsiteltävä pelaaja
      */
     private Pelaaja pelaaja;
-
     /**
      * Muuttuja joka pitää kirjaa ensiksi painetusta suuntanapista
      */
     private Painike ensiksiPainettu = Painike.NULL;
-    
     /**
      * Nappien tilasta kirjaa pitävät booleanit
      */
     private boolean vasen = false;
     private boolean oikea = false;
     private boolean hyppy = false;
+    /**
+     * Muuttuja joka estää pelaajan jatkuvan hyppimisen kun hyppynappia pidetään
+     * pohjassa.
+     */
+    private int hyppynapinAbusointiMuuttuja;
 
     public Kuuntelija(Pelaaja pelaaja) {
         this.pelaaja = pelaaja;
@@ -93,6 +96,10 @@ public class Kuuntelija implements KeyListener {
         kutsuMetodeja();
     }
 
+    /**
+     * Logiikka joka käsittelee pelaajan käskemisen näppäinpainallusten
+     * perusteella.
+     */
     private void kutsuMetodeja() {
         if (oikea && vasen) {
             if (ensiksiPainettu == Painike.VASEN) {
@@ -109,9 +116,27 @@ public class Kuuntelija implements KeyListener {
             ensiksiPainettu = Painike.NULL;
         }
 
-        if (hyppy == true) {
-            pelaaja.aloitaHyppy();
+        /**
+         * Eli näillä estetään toistuvat hypyt hyppynapin ollessa pohjassa. Kun
+         * hyppynappi on pohjassa, hyppynapinAbusointiMuuttuja kasvattaa arvoaan
+         * lineaarisesti. Hypätä voi vain jos sen arvo on vähemmän tai yhtäsuuri
+         * kuin yksi, eli vain sinä hetkenä kun käyttäjä painaa hyppynappia.
+         */
+        if (hyppy) {
+            this.hyppynapinAbusointiMuuttuja++;
         } else {
+            this.hyppynapinAbusointiMuuttuja = 0;
+        }
+
+        if (hyppy && this.hyppynapinAbusointiMuuttuja <= 1) {
+            pelaaja.aloitaHyppy();
+            hyppy = false;
+
+            /**
+             * Tämä ehtolause on tarpeen, jotta pelaaja voi säädellä hypyn
+             * korkeutta vapauttamalla hyppynapin aikaisemmin.
+             */
+        } else if (!hyppy) {
             pelaaja.pysaytaHyppy();
         }
     }

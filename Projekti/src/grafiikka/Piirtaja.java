@@ -14,7 +14,7 @@ import tasonLogiikka.Piste;
 import tasonLogiikka.Taso;
 
 /**
- * Piirtää tason ominaisuudet.
+ * Piirtää tason ominaisuudet piirtoalustalle.
  *
  * @author jiji
  */
@@ -41,6 +41,12 @@ public class Piirtaja {
      * @param graphics
      */
     public void piirra(Graphics graphics) {
+        /**
+         * ja järjestys tietenkin määrittelee mitkä menevät taka-alalle ja mitkä
+         * etualalle. Pelaaja piirretään ennen tasoa, koska pelaajan hahmo on
+         * (tarkoituksella) hieman isompi kuin sen logiikan määrittelemät rajat,
+         * jotta se ei ikinä leijailisi maan yläpuolella tai overlappaa sitä.
+         */
         piirraTausta(graphics);
         piirraPelaaja(graphics);
         piirraTaso(graphics, pelaaja.getTaso());
@@ -103,10 +109,12 @@ public class Piirtaja {
          * Ao. yhtälöissä jakolasku johtuu siitä että halajamme viivoihin mageen
          * parallaksiefektin.
          *
-         * Ja jooooo for-looppi on kovakoodattu, eli jos pelaaja menee tarpeeksi
-         * kauas vasemmalle, oikealle, ylös tai alas, viivat loppuvat. En nähnyt
-         * tarpeelliseksi generoida loputonta viivakenttää tässä vaiheessa
+         * Ja jooooo for-loopin pituus on kovakoodattu, eli jos pelaaja menee
+         * tarpeeksi kauas vasemmalle, oikealle, ylös tai alas, viivat loppuvat.
+         * En nähnyt tarpeelliseksi generoida loputonta viivakenttää tässä
+         * vaiheessa
          */
+        
         /**
          * Vaakaraita
          */
@@ -117,19 +125,20 @@ public class Piirtaja {
                     Math.max(0, 255 - i * 4)));
             graphics.fillRect(0, -kamera.getY() / 5 + i * 180 + 100, 1024, 100);
         }
+        
         /**
          * Toinen vaakaraita!
          */
         for (int i = 0; i < 20; i++) {
             graphics.setColor(new Color(
-                    Math.max(0, 255 - i * 8),
-                    Math.max(0, 230 - i * 4),
-                    Math.max(0, 230 - i * 4)));
+                    Math.max(0, 255 - i * 4),
+                    Math.max(0, 255 - i * 4),
+                    Math.max(0, 255 - i * 8)));
             graphics.fillRect(0, -kamera.getY() / 4 + i * 180 + 100, 1024, 80);
         }
 
         /**
-         * Nooooh pistetään nty vielä pystyraita!!!1
+         * Nooooh pistetään nty vielä opaquoottinen pystyraita!!!1
          */
         for (int i = 0; i < 20; i++) {
             graphics.setColor(new Color(

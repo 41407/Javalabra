@@ -5,6 +5,7 @@
 package tasonLogiikka;
 
 /**
+ * Enumeraattori joka selkeyttää esteiden käsittelyä
  * 
  * @author jiji
  */
