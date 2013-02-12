@@ -98,4 +98,12 @@ public class Este {
         pisteet.add(oikeaAlakulma);
         return pisteet;
     }
+    
+    @Override
+    public String toString() {
+        return "E " + vasenYlakulma.getX() + " " +
+               vasenYlakulma.getY() + " " +
+               oikeaAlakulma.getX() + " " + 
+               oikeaAlakulma.getY() + "\n";
+    }
 }

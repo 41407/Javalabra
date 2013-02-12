@@ -18,7 +18,7 @@ public class Piirtoalusta extends JPanel {
     private Piirtaja piirtaja;
 
     public Piirtoalusta(Pelaaja pelaaja, Kamera kamera) {
-        super.setBackground(Color.WHITE);
+        super.setBackground(new Color(200,200,200));
         this.piirtaja = new Piirtaja(pelaaja, kamera);
     }
 
@@ -26,6 +26,5 @@ public class Piirtoalusta extends JPanel {
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         piirtaja.piirra(graphics);
-        this.repaint();
     }
 }

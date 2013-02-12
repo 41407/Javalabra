@@ -4,7 +4,7 @@
  */
 package juoksu;
 
-import grafiikka.Kayttoliittyma;
+import grafiikka.Ikkuna;
 import grafiikka.Piirtaja;
 import javax.swing.SwingUtilities;
 import tasonLogiikka.Pelaaja;

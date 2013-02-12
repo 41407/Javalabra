@@ -58,7 +58,5 @@ public class TasonLuontiTest {
             koordinaatit.add(j);
             j += 50;
         }
-        
-        
     }
 }

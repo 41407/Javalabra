@@ -42,7 +42,8 @@ public class PelaajaTest {
         this.p = new Piste(0, 0);
         this.e = new Este(0, 0, 100, 100);
         this.t = new Taso(50, 0);
-        this.pe = new Pelaaja(t);
+        this.pe = new Pelaaja();
+        this.pe.setTaso(t);
     }
 
     @After
@@ -106,7 +107,8 @@ public class PelaajaTest {
     // Apumetodi
     public void laitetaasPariEstetta() {
         t = new Taso();
-        pe = new Pelaaja(t);
+        pe = new Pelaaja();
+        pe.setTaso(t);
         pe.siirra(5, 95);
         t.lisaaEste(new Este(-50, 0, 0, 200));
         t.lisaaEste(new Este(-100, 100, 200, 150));
@@ -139,7 +141,8 @@ public class PelaajaTest {
     // Apumetodi
     public void laitetaasPariPientaEstetta() {
         t = new Taso(10, 10);
-        pe = new Pelaaja(t);
+        pe = new Pelaaja();
+        pe.setTaso(t);
         t.lisaaEste(new Este(0, 100, 1000, 200));
         t.lisaaEste(new Este(400, 90, 600, 200));
     }

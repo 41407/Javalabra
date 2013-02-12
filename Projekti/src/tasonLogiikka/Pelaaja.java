@@ -7,7 +7,7 @@ package tasonLogiikka;
 /**
  * Luokka pitää sisällään kaiken logiikan pelaajan liikkumiseen liittyen, ja
  * siihen kuuluu myös Taso.
- * 
+ *
  * @author jiji
  */
 public class Pelaaja extends Piste {
@@ -16,58 +16,46 @@ public class Pelaaja extends Piste {
      * Hahmon nopeus y-akselilla eli pystysuunnassa
      */
     private int yNopeus;
-    
-    /** 
+    /**
      * Hahmon nopeus x-akselilla
      */
     private int xNopeus;
-
     /**
-     * Suunta johon pelaaja haluaa liikkua, eli mihin suuntaan pelaaja
-     * on painanut nappia
+     * Suunta johon pelaaja haluaa liikkua, eli mihin suuntaan pelaaja on
+     * painanut nappia
      */
     private int xSuunta;
-    
     /**
      * Muuttuja joka antaa pelaajan vaikuttaa hypyn korkeuteen
      */
     private int isoHyppy;
-    
     /**
      * Kuinka monta pikseliä/frame pelaajan hahmo putoaa y-akselilla
      */
     private final int putoamiskiihtyvyysPerFrame;   // joopa
-    
     /**
-     * Pelaajan putoamisen maksiminopeus, jonka saavutettuaan putoaminen
-     * ei enää kiihdy
+     * Pelaajan putoamisen maksiminopeus, jonka saavutettuaan putoaminen ei enää
+     * kiihdy
      */
     private final int terminaalinopeus;             // joo
-
     /**
      * Pelaajan hahmon korkeus pikseleinä
      */
     private final int ukkelinKorkeus;               // heh
-    
     /**
      * Taso jolla pelaaja liikkuu
      */
     private Taso taso;
-    
     /**
      * Mihin esteeseen pelaaja on osunut viimeksi
      */
     private EsteenTyyppi osuikoJohonkin = null;     // dsfasd
 
     /**
-     * Konstruoidaan pelaaja ja laitetaan se parametrina annettuun tasoon.
-     * 
-     * @param taso
+     * Konstruoidaan pelaaja
      */
-    public Pelaaja(Taso taso) {
-        super(taso.getPelaajanAlkusijainti().getX(),
-                taso.getPelaajanAlkusijainti().getY());
-        this.taso = taso;
+    public Pelaaja() {
+        super(0, 0);
         yNopeus = 0;
         xNopeus = 0;
         xSuunta = 0;
@@ -93,9 +81,15 @@ public class Pelaaja extends Piste {
         return taso;
     }
 
+    public void setTaso(Taso taso) {
+        this.taso = taso;
+        this.setXY(taso.getPelaajanAlkusijainti());
+        this.osuikoJohonkin = null;
+    }
+
     /**
      * Metodi jolla käynnistetään kaikki pelaajan logiikkaan liittyvät metodit.
-     * 
+     *
      * @return osuikoJohonkin, josta metodia kutsuva pelilogiikka voi päätellä
      * kuinka jatketaan
      */
@@ -138,15 +132,15 @@ public class Pelaaja extends Piste {
      */
     private int testaaPisteYAkselilla(int nopeus) {
 
-        // Aloitamme testaamisen hahmon vasemmasta laidasta
+        // Testattavan vaakarivin vasen laita on hahmon vasen laita
         Piste testattavaPiste = new Piste(this.getX() - 12, this.getY());
- 
+
         // Sisäkkäisten looppien keskeyttämistä varten
         boolean loytyiEste = false;
-       
+
         // Iteraattori
         int yTestattava = 0;
-        
+
         // Koodia selkeyttävä apumuuttuja
         int suunta = 1;
 
@@ -158,34 +152,33 @@ public class Pelaaja extends Piste {
             suunta = -1;
         }
 
-        /* Testataan sekä hahmon vasen että oikea laita. So far ei liene
-         * mielekästä testata tämän suuremmalla resoluutiolla
-         */
-        for (int i = 0; i < 2; i++) {
-            while (Math.abs(yTestattava) < Math.abs(yNopeus)) {
-                // Siirretään pistettä y-akselilla
-                testattavaPiste.siirra(0, suunta);
-
-                // Jos pisteessä on este, lopetetaan testaaminen ja palautetaan
-                if (testaaPiste(testattavaPiste)) {
-                    yNopeus = 0;
-                    loytyiEste = true;
-                    break;
-
-                    // Jos ei, jatketaan etsintöjä
-                } else {
-                    yTestattava += suunta;
-                }
-            }
-            if (loytyiEste == true) {
+        while (yTestattava <= Math.abs(this.yNopeus)) {
+            if (testaaVaakarivi(testattavaPiste)) {
+                this.yNopeus = 0;
                 break;
             }
-            /* Siirretään testattava piste takaisin hahmon kohdalle ja kokeillaan
-             * hahmon toista laitaa
-             */
-            testattavaPiste.siirra(24, -yNopeus * -suunta);
+            yTestattava++;
+            testattavaPiste.siirra(0, suunta);
         }
-        return yTestattava;
+        return yTestattava * suunta;
+    }
+
+    /**
+     * Testaa onko pisteen määrittämällä 24 pikselin levyisellä vaakarivillä
+     * este.
+     *
+     * @param p0 Testattavan rivin vasen laita
+     * @return
+     */
+    private boolean testaaVaakarivi(Piste p0) {
+        Piste p1 = new Piste(p0.getX(), p0.getY());
+        for (int i = 0; i < 24; i++) {
+            if (testaaPiste(p1)) {
+                return true;
+            }
+            p1.siirra(1, 0);
+        }
+        return false;
     }
 
     /**
@@ -276,7 +269,7 @@ public class Pelaaja extends Piste {
                 xNopeus = 0;
             }
         }
-        return (xTestattava-1) * suunta;
+        return (xTestattava - 1) * suunta;
     }
 
     /*
@@ -290,7 +283,7 @@ public class Pelaaja extends Piste {
             }
             p1.siirra(0, 1);
         }
-        return p0.getY()-p1.getY();
+        return p0.getY() - p1.getY();
     }
 
     /**
@@ -301,13 +294,31 @@ public class Pelaaja extends Piste {
          * 
          */
         Piste p0 = new Piste(this.getX() - 12, this.getY() + 1);
-        Piste p1 = new Piste(this.getX() + 12, this.getY() + 1);
-        if (testaaPiste(p0) || testaaPiste(p1)) {
+
+        if (testaaVaakarivi(p0)) {
             /* 
              * isoHyppy mahdollistaa hypyn korkeuden säätelyn siten, että
              * pidempi painallus = korkeampi hyppy
              */
             isoHyppy = 9;
+            /**
+             * Valmistellaan testattavat pisteet seinähyppyä varten
+             */
+        } else {
+            p0.siirra(-1, 0);
+            Piste p1 = new Piste(p0.getX() + 26, p0.getY());
+
+
+            /**
+             * Testataan onnistuuko seinähyppy
+             */
+            if (testaaPystyrivi(p0) > 0 && this.xSuunta == -1) {
+                isoHyppy = 9;
+                xNopeus = 15;
+            } else if (testaaPystyrivi(p1) > 0 && this.xSuunta == 1) {
+                isoHyppy = 9;
+                xNopeus = -15;
+            }
         }
     }
 
@@ -353,7 +364,7 @@ public class Pelaaja extends Piste {
 
         // Hahmon sivuttaiskiihtyvyys kun se on ilmassa
         if (yNopeus != 0) {
-            kiihtyvyyskerroin = 2;
+            kiihtyvyyskerroin = 1;
         }
 
         // Liikuttaessa oikealle
@@ -361,6 +372,8 @@ public class Pelaaja extends Piste {
             // Maksiminopeus 10 px/f
             if (xNopeus < 10) {
                 xNopeus += kiihtyvyyskerroin;
+            } else {
+                xNopeus--;
             }
 
             // Liikuttaessa vasemmalle
@@ -368,6 +381,8 @@ public class Pelaaja extends Piste {
             // Maksiminopeus 10 px/f
             if (xNopeus > -10) {
                 xNopeus -= kiihtyvyyskerroin;
+            } else {
+                xNopeus++;
             }
 
             // Hidastuminen kun mitään nappia ei paineta

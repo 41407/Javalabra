@@ -4,14 +4,15 @@
  */
 package juoksu;
 
+import grafiikka.Ikkuna;
 import grafiikka.Kamera;
-import grafiikka.Kayttoliittyma;
+import grafiikka.Piirtoalusta;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import tasonLogiikka.EsteenTyyppi;
 import tasonLogiikka.Pelaaja;
-import tasonLogiikka.Taso;
+import tasonLogiikka.Piste;
 import tiedosto.Tiedostonlukija;
 
 /**
@@ -29,8 +30,12 @@ public class Juoksu {
      * Pelaajahahmoon liitettävä kameraolio
      */
     private Kamera kamera;
+    private Ikkuna kayttoliittyma;
 
     public Juoksu() {
+        this.pelaaja = new Pelaaja();
+        this.kamera = new Kamera(0, 0);
+        this.kayttoliittyma = new Ikkuna(pelaaja, kamera);
         juokse();
     }
 
@@ -38,21 +43,30 @@ public class Juoksu {
      * Iskee tulille leveelin ja käyttöliittymän
      */
     public void initialisoiSysteemit(int i) {
-        Taso taso = new Taso();
+        initialisoiTaso(i);
+        SwingUtilities.invokeLater(kayttoliittyma);
 
+    }
 
+    private void initialisoiTaso(int i) {
         try {
             Tiedostonlukija lukija = new Tiedostonlukija("src/" + i + ".txt");
-            this.pelaaja = new Pelaaja(lukija.luoTaso());
+            this.pelaaja.setTaso(lukija.luoTaso());
         } catch (Exception ex) {
-            Logger.getLogger(Juoksu.class.getName()).log(Level.SEVERE, null, ex);
+            Tiedostonlukija lukija;
+            try {
+                lukija = new Tiedostonlukija("src/gg.txt");
+                this.pelaaja.setTaso(lukija.luoTaso());
+            } catch (Exception ex1) {
+                Logger.getLogger(Juoksu.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
 
-        this.kamera = new Kamera(taso.getPelaajanAlkusijainti().getX(),
-                taso.getPelaajanAlkusijainti().getY() - 2000);
+        this.kamera.setXY(new Piste(pelaaja.getTaso().getPelaajanAlkusijainti().getX()-405,
+                pelaaja.getTaso().getPelaajanAlkusijainti().getY()));
+        this.kamera.seuraa(pelaaja);
 
-        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(pelaaja, kamera);
-        SwingUtilities.invokeLater(kayttoliittyma);
+        this.kayttoliittyma.setPiirtoalusta(new Piirtoalusta(pelaaja, kamera));
     }
 
     /**
@@ -60,28 +74,26 @@ public class Juoksu {
      */
     public void juokse() {
         int i = 0;
-
         initialisoiSysteemit(i);
+
         while (true) {
-
             while (true) {
-
                 try {
                     Thread.sleep(16);
                 } catch (InterruptedException ex) {
                     System.out.println("joku meni vituiks :D");
                 }
-
                 pelaaja.eksistoi();
                 kamera.seuraa(pelaaja);
                 if (pelaaja.getOsuikoJohonkin() == EsteenTyyppi.MAALI) {
                     i++;
                     break;
                 } else if (pelaaja.getOsuikoJohonkin() == EsteenTyyppi.KUOLO) {
-                    i--;
                     break;
                 }
+                this.kayttoliittyma.repaint();
             }
+            initialisoiTaso(i);
         }
     }
 }

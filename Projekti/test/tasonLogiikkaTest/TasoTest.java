@@ -62,7 +62,8 @@ public class TasoTest {
     public void tasoAsetaPelaajanAlkusijaintiToimii() {
         Piste r = new Piste(20, 20);
         t.asetaPelaajanAlkusijainti(r);
-        Pelaaja pe = new Pelaaja(t);
+        Pelaaja pe = new Pelaaja();
+        pe.setTaso(t);
         assertTrue("Pelaajan alkusijainti oli väärä", pe.getX() == 20 && pe.getY() == 20);
         assertTrue("GetPelaajanAlkusijainti palautti väärin",
                 t.getPelaajanAlkusijainti() == r);
