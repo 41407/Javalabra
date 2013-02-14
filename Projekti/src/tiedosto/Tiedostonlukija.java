@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import tasonLogiikka.Este;
 import tasonLogiikka.Taso;
-import tasonLogiikka.TasonLuonti;
 
 /**
- * Luokka joka valmistelee rivit tiedostosta luokkaa TasonLuonti varten.
+ * Luokka joka valmistelee rivit tiedostosta muita tallennusta ja lukua
+ * tarvitsevia luokkia varten.
  * 
  * @author 41407
  */
@@ -55,15 +55,5 @@ public class Tiedostonlukija {
 
     public ArrayList<String> getRivit() {
         return rivit;
-    }
-
-    /**
-     * Metodi joka käskee TasonLuontia kehittämään tason this.riveistä
-     * 
-     * @return Palauttaa luodun tason.
-     */
-    public Taso luoTaso() {
-        TasonLuonti tasonLuonti = new TasonLuonti(rivit);
-        return tasonLuonti.getTaso();
     }
 }

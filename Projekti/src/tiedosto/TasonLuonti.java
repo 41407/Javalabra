@@ -2,13 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tasonLogiikka;
+package tiedosto;
 
 import java.util.ArrayList;
+import tasonLogiikka.Este;
+import tasonLogiikka.EsteenTyyppi;
+import tasonLogiikka.Piste;
+import tasonLogiikka.Taso;
 
 /**
  * Luokka jolla muutetaan stringeistä koostuva arraylist tasoksi
- * 
+ *
  * @author 41407
  */
 public class TasonLuonti {
@@ -17,7 +21,6 @@ public class TasonLuonti {
      * Käsiteltävät rivit
      */
     private ArrayList<String> rivit;
-
     /**
      * Taso jonka kanssa työskennellään ja joka lopuksi palautetaan
      */
@@ -25,8 +28,8 @@ public class TasonLuonti {
 
     /**
      * Konstruktori luo tason samantien sille syötetyistä riveistä.
-     * 
-     * @param rivit 
+     *
+     * @param rivit
      */
     public TasonLuonti(ArrayList<String> rivit) {
         this.rivit = rivit;
@@ -55,10 +58,6 @@ public class TasonLuonti {
         }
     }
 
-    public Taso getTaso() {
-        return taso;
-    }
-
     /**
      * Välivaiheet eroteltu selkeyden vuoksi.
      */
@@ -77,7 +76,7 @@ public class TasonLuonti {
     }
 
     private ArrayList<Integer> stringKoordinaateiksi(String string) {
-        /** 
+        /**
          * Alotetaan string[2]:sta koska ekat 2 merkkiä on E ja spacebar
          */
         ArrayList<Integer> koordinaatit = new ArrayList();
@@ -108,5 +107,9 @@ public class TasonLuonti {
             }
         }
         return pisteet;
+    }
+
+    public Taso getTaso() {
+        return taso;
     }
 }

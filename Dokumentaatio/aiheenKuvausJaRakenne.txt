@@ -6,6 +6,10 @@ Pelaajan aloitettua peli, peli lataa tason tiedostosta. Jos pelaaja
 läpäisee tason tai joutuu aloittamaan tason alusta, peli lataa
 tarvittavan tason tiedostosta.
 
+Tason läpäistyään pelaajan tilanne tallentuu tiedostoon. Pelin
+suorituksen alussa pelaaja voi halutessaan jatkaa tallentamastaan
+kohdasta.
+
 USP: jos pelaaja putoaa rotkoon, peli ei keskeydy vaan rotkoon
 pudottuaan pelaaja huomaa joutuneensa tason alkupisteeseen.
 Tämä siksi että pelikokemus olisi mahdollisimman smooooth.
@@ -16,5 +20,8 @@ Käyttäjät: Pelaaja
 
 Toiminnot:
 	Uuden pelin aloittaminen
+	Tallennetun pelin jatkamienn
 	Pelaaminen
 	Tason lataaminen tiedostosta
+	Tilanteen tallentaminen tiedostoon
+

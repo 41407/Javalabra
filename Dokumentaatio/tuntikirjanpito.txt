@@ -55,6 +55,9 @@ En muistanut pitää kirjaa muutamista aiemmista koodailusessiosta!
 - Lisää tasoja
 - Lisää javadoccia
 
-
+14. 2. 2013 2h
+- Pelaajan tilanteen tallennus ja lataus toimii
+- Pieniä refaktorointeja siellä täällä, etenkin tiedostonlukija on nyt 
+  loogisempi
 
 
