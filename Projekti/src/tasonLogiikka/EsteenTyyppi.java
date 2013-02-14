@@ -10,5 +10,5 @@ package tasonLogiikka;
  * @author jiji
  */
 public enum EsteenTyyppi {
-    ESTE, MAALI, KUOLO
+    ESTE, MAALI, KUOLO, SPECIAL
 }

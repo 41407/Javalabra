@@ -49,6 +49,8 @@ public class TasonLuonti {
                 esteRivi(string, EsteenTyyppi.MAALI);
             } else if (etumerkki == 'K') {
                 esteRivi(string, EsteenTyyppi.KUOLO);
+            } else if (etumerkki == 'X') {
+                esteRivi(string, EsteenTyyppi.SPECIAL);
             }
         }
     }

@@ -40,6 +40,7 @@ public class Juoksu {
         this.pelaaja = new Pelaaja();
         this.kamera = new Kamera(0, 0);
         this.ikkuna = new Ikkuna(pelaaja, kamera);
+        
         juokse();
     }
 
@@ -127,11 +128,18 @@ public class Juoksu {
                 /**
                  * Tason lopettamisen määrittävä ehtolause
                  */
-                if (pelaaja.getOsuikoJohonkin() == EsteenTyyppi.MAALI) {
+                EsteenTyyppi este = pelaaja.getOsuikoJohonkin();
+                if (este == EsteenTyyppi.MAALI) {
                     tasonNumero++;
                     break;
-                } else if (pelaaja.getOsuikoJohonkin() == EsteenTyyppi.KUOLO) {
+                } else if (este == EsteenTyyppi.KUOLO) {
                     break;
+                } else if (este == EsteenTyyppi.SPECIAL) {
+                    if(tasonNumero == 0) {
+                        System.out.println("bingobango!");
+                        tasonNumero++;
+                        break;
+                    }
                 }
                 /**
                  * Grafiikan päivitys

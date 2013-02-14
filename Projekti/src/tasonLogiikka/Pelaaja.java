@@ -203,13 +203,9 @@ public class Pelaaja extends Piste {
      * pelaajan attribuutin osuikoJohonkin vastaamaan esteen tyyppiä.
      */
     private boolean testaaPiste(Piste piste) {
-        if (taso.onkoPisteessaEste(piste) == EsteenTyyppi.ESTE) {
-            return true;
-        } else if (taso.onkoPisteessaEste(piste) == EsteenTyyppi.MAALI) {
-            this.osuikoJohonkin = EsteenTyyppi.MAALI;
-            return true;
-        } else if (taso.onkoPisteessaEste(piste) == EsteenTyyppi.KUOLO) {
-            this.osuikoJohonkin = EsteenTyyppi.KUOLO;
+        EsteenTyyppi este = taso.onkoPisteessaEste(piste);
+        if (este != null) {
+            this.osuikoJohonkin = este;
             return true;
         }
         return false;
@@ -237,6 +233,7 @@ public class Pelaaja extends Piste {
 
         // Iteraattori
         int xTestattava = 0;
+        
         int suunta;
 
         int absNopeus = xNopeus;

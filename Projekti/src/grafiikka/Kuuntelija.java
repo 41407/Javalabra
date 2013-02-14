@@ -10,6 +10,11 @@ import tasonLogiikka.Pelaaja;
 
 /**
  * Näppäimistön kuuntelija.
+ * 
+ * Disclaimer:
+ * Toisin kuin Windowsissa tai Macissa, hyppynapin pohjassa pitäminen johtaa
+ * Linux-ympäristössä hahmon jatkuvaan hypiskelyyn. Syynä lienee erilainen
+ * näppäimistösyötteiden käsittely käyttöjärjestelmien välillä. :(.
  *
  * @author 41407
  */
@@ -56,15 +61,15 @@ public class Kuuntelija implements KeyListener {
             if (ensiksiPainettu == Painike.NULL) {
                 ensiksiPainettu = Painike.VASEN;
             }
-
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             oikea = true;
             if (ensiksiPainettu == Painike.NULL) {
                 ensiksiPainettu = Painike.OIKEA;
             }
-        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+        }
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             hyppy = true;
-
         }
         kutsuMetodeja();
     }
@@ -88,9 +93,11 @@ public class Kuuntelija implements KeyListener {
     public void keyReleased(KeyEvent ke) {
         if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
             vasen = false;
-        } else if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
+        }
+        if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
             oikea = false;
-        } else if (ke.getKeyCode() == KeyEvent.VK_SPACE) {
+        }
+        if (ke.getKeyCode() == KeyEvent.VK_SPACE) {
             hyppy = false;
         }
         kutsuMetodeja();
@@ -130,7 +137,6 @@ public class Kuuntelija implements KeyListener {
 
         if (hyppy && this.hyppynapinAbusointiMuuttuja <= 1) {
             pelaaja.aloitaHyppy();
-            hyppy = false;
 
             /**
              * Tämä ehtolause on tarpeen, jotta pelaaja voi säädellä hypyn

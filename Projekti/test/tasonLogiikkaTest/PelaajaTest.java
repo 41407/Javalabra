@@ -88,7 +88,10 @@ public class PelaajaTest {
     public void hahmoLiikkuuVasemmalle() {
         int hahmonKoordinaattiAlussa = pe.getX();
         pe.liikuVasemmalle();
-        pe.eksistoi();
+        
+        for (int i = 0; i < 10; i++) {
+            pe.eksistoi();
+        }
 
         assertTrue("Hahmo ei liikkunut vasemmalle", pe.getX()
                 < hahmonKoordinaattiAlussa);
@@ -98,8 +101,9 @@ public class PelaajaTest {
     public void hahmoLiikkuuOikealle() {
         int hahmonKoordinaattiAlussa = pe.getX();
         pe.liikuOikealle();
-        pe.eksistoi();
-
+        for (int i = 0; i < 10; i++) {
+            pe.eksistoi();
+        }
         assertTrue("Hahmo ei liikkunut oikealle", pe.getX()
                 > hahmonKoordinaattiAlussa);
     }
