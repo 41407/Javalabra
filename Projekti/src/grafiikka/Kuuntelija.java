@@ -71,6 +71,9 @@ public class Kuuntelija implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             hyppy = true;
         }
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            pelaaja.lopetaTaso();
+        }
         kutsuMetodeja();
     }
 

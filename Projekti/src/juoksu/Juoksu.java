@@ -138,7 +138,6 @@ public class Juoksu {
                 if (este == EsteenTyyppi.MAALI) {
                     tasonNumero++;
                     tallennaPelaajanTilanne(tasonNumero);
-                    System.out.println(tasonNumero);
                     break;
                 } else if (este == EsteenTyyppi.KUOLO) {
                     break;
@@ -152,6 +151,9 @@ public class Juoksu {
                         tasonNumero = lataaPelaajanTallennustiedosto();
                         break;
                     }
+                }
+                if (este == EsteenTyyppi.QUIT) {
+                    System.exit(0);
                 }
                 /**
                  * Grafiikan päivitys

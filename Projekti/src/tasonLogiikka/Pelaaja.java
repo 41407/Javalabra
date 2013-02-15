@@ -201,8 +201,13 @@ public class Pelaaja extends Piste {
     /**
      * Metodi joka testaa onko pisteessä este. Jos on, metodi säätää myös
      * pelaajan attribuutin osuikoJohonkin vastaamaan esteen tyyppiä.
+     * 
+     * Myös escin lähmäisy on käsitelty tässä :/
      */
     private boolean testaaPiste(Piste piste) {
+        if(this.osuikoJohonkin == EsteenTyyppi.QUIT) {
+            return false;
+        }
         EsteenTyyppi este = taso.onkoPisteessaEste(piste);
         if (este != null) {
             this.osuikoJohonkin = este;
@@ -427,6 +432,10 @@ public class Pelaaja extends Piste {
             }
         }
 
+    }
+
+    public void lopetaTaso() {
+        this.osuikoJohonkin = EsteenTyyppi.QUIT;
     }
 }
 

@@ -6,9 +6,10 @@ package tasonLogiikka;
 
 /**
  * Enumeraattori joka selkeyttää esteiden käsittelyä
- * 
+ *
  * @author jiji
  */
 public enum EsteenTyyppi {
-    ESTE, MAALI, KUOLO, SPECIAL
+
+    ESTE, MAALI, KUOLO, SPECIAL, QUIT
 }
