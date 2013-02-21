@@ -5,10 +5,10 @@
 package tiedosto;
 
 import java.util.ArrayList;
-import tasonLogiikka.Este;
-import tasonLogiikka.EsteenTyyppi;
-import tasonLogiikka.Piste;
-import tasonLogiikka.Taso;
+import logiikka.Este;
+import logiikka.EsteenTyyppi;
+import logiikka.Piste;
+import logiikka.Taso;
 
 /**
  * Luokka jolla muutetaan stringeistä koostuva arraylist tasoksi

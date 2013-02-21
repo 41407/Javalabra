@@ -7,7 +7,7 @@ package juoksu;
 import grafiikka.Ikkuna;
 import grafiikka.Piirtaja;
 import javax.swing.SwingUtilities;
-import tasonLogiikka.Pelaaja;
+import logiikka.Pelaaja;
 
 /**
  * Turhahko main-luokka

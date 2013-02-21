@@ -7,8 +7,8 @@ package tiedosto;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
-import tasonLogiikka.Este;
-import tasonLogiikka.Taso;
+import logiikka.Este;
+import logiikka.Taso;
 
 /**
  * Luokka joka valmistelee rivit tiedostosta muita tallennusta ja lukua

@@ -11,7 +11,7 @@ package grafiikka;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
-import tasonLogiikka.Pelaaja;
+import logiikka.Pelaaja;
 
 public class Piirtoalusta extends JPanel {
 

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tasonLogiikka;
+package logiikka;
 
 /**
  * Enumeraattori joka selkeyttää esteiden käsittelyä

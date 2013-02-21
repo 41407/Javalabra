@@ -4,8 +4,8 @@
  */
 package grafiikka;
 
-import tasonLogiikka.Pelaaja;
-import tasonLogiikka.Piste;
+import logiikka.Pelaaja;
+import logiikka.Piste;
 
 /**
  * Dynaamisen kuvakulman toteuttava luokka. Käytännössä Piste, jolle tehdään

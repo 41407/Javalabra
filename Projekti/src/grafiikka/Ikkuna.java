@@ -12,7 +12,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import tasonLogiikka.Pelaaja;
+import logiikka.Pelaaja;
 
 
 /**

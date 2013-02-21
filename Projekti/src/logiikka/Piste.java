@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tasonLogiikka;
+package logiikka;
 
 /**
  * Piste. Sillä on x ja y. Sitä voi liikuttaa. Sitä voi käskeä menemään

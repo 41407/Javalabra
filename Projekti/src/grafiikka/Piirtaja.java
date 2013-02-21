@@ -7,11 +7,11 @@ package grafiikka;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import tasonLogiikka.Este;
-import tasonLogiikka.EsteenTyyppi;
-import tasonLogiikka.Pelaaja;
-import tasonLogiikka.Piste;
-import tasonLogiikka.Taso;
+import logiikka.Este;
+import logiikka.EsteenTyyppi;
+import logiikka.Pelaaja;
+import logiikka.Piste;
+import logiikka.Taso;
 
 /**
  * Piirtää tason ominaisuudet piirtoalustalle.

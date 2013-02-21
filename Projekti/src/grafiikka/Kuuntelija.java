@@ -6,7 +6,7 @@ package grafiikka;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import tasonLogiikka.Pelaaja;
+import logiikka.Pelaaja;
 
 /**
  * Näppäimistön kuuntelija.

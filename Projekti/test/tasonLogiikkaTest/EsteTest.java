@@ -4,16 +4,16 @@
  */
 package tasonLogiikkaTest;
 
-import tasonLogiikka.Piste;
-import tasonLogiikka.Este;
+import logiikka.Piste;
+import logiikka.Este;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import tasonLogiikka.Pelaaja;
-import tasonLogiikka.Taso;
+import logiikka.Pelaaja;
+import logiikka.Taso;
 
 /**
  *
