@@ -11,36 +11,42 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import tiedosto.TallennuksenKasittelija;
 
 /**
  *
  * @author jiji
  */
-public class TiedostonlukijaTest {
-    
-    public TiedostonlukijaTest() {
+public class TallennuksenKasitelijaTest {
+
+    TallennuksenKasittelija k;
+
+    public TallennuksenKasitelijaTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
+        this.k = new TallennuksenKasittelija();
     }
-    
+
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    @Test
-    public void hello() {
 
+    @Test
+    public void TallennuksenKasittelijaLoytaaTasonNumeronArrayListista() {
+        ArrayList<String> rivit = new ArrayList();
+        rivit.add("Taso: 4");
+        int x = k.etsiTasonNumero(rivit);
+
+        assertTrue("taso oli väärä!", x == 4);
     }
 }
