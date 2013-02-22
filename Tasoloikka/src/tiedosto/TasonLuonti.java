@@ -54,6 +54,9 @@ public class TasonLuonti {
                 esteRivi(string, EsteenTyyppi.KUOLO);
             } else if (etumerkki == 'X') {
                 esteRivi(string, EsteenTyyppi.SPECIAL);
+            } else {
+                System.out.println("Tason luonnissa tiedostosta tapahtui virhe!");
+                return;
             }
         }
     }
@@ -69,12 +72,23 @@ public class TasonLuonti {
         taso.lisaaEste(e);
     }
 
+    /**
+     * Sama homma pelaajarivin tapauksessa.
+     *
+     * @param string
+     */
     private void pelaajaRivi(String string) {
         ArrayList<Integer> koordinaatit = stringKoordinaateiksi(string);
         ArrayList<Piste> pisteet = muutaPisteiksi(koordinaatit);
         taso.asetaPelaajanAlkusijainti(pisteet.get(0));
     }
 
+    /**
+     * Muuttaa annetun stringin integer-arraylistaksi.
+     *
+     * @param string
+     * @return
+     */
     private ArrayList<Integer> stringKoordinaateiksi(String string) {
         /**
          * Alotetaan string[2]:sta koska ekat 2 merkkiä on E ja spacebar
@@ -95,6 +109,12 @@ public class TasonLuonti {
         return koordinaatit;
     }
 
+    /**
+     * Muuntaa annetun integer-arraylistan piste-arraylistaksi.
+     *
+     * @param koordinaatit
+     * @return
+     */
     private ArrayList<Piste> muutaPisteiksi(ArrayList<Integer> koordinaatit) {
         ArrayList<Piste> pisteet = new ArrayList();
 

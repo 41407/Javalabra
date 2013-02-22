@@ -47,6 +47,9 @@ public class Tiedostonlukija {
         rivitTalteen();
     }
     
+    /**
+     * Kerää tiedostosta rivit oliomuuttujaan Scannerin avulla.
+     */
     private void rivitTalteen() {
         while (lukija.hasNext()) {
             rivit.add(lukija.nextLine());

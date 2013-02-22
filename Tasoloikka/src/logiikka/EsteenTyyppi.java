@@ -5,7 +5,7 @@
 package logiikka;
 
 /**
- * Enumeraattori joka selkeyttää esteiden käsittelyä
+ * Enumeraattori joka selkeyttää esteiden käsittelyä mm. Pelaaja-luokassa
  *
  * @author jiji
  */

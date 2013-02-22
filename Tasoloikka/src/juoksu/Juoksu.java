@@ -19,7 +19,8 @@ import tiedosto.Tiedostonkirjoittaja;
 import tiedosto.Tiedostonlukija;
 
 /**
- * Pelin keskeisen logiikan käynnistävä ja hallinnoiva luokka
+ * Pelin keskeisen logiikan käynnistävä ja hallinnoiva luokka joka pyörittää
+ * pääsilmukkaa
  *
  * @author 41407
  */

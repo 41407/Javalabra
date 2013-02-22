@@ -10,11 +10,12 @@ import javax.swing.SwingUtilities;
 import logiikka.Pelaaja;
 
 /**
- * Turhahko main-luokka
+ * Turhahko main-luokka. On olemassa lähinnä sen takia että tänne voisi lisätä
+ * alkumenujuttuja ja jne
  * 
  * @author 41407
  */
-public class Projekti {
+public class TasoloikkaMain {
 
     /**
      * @param args the command line arguments

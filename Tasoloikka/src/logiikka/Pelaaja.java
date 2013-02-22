@@ -239,8 +239,10 @@ public class Pelaaja extends Piste {
         // Iteraattori
         int xTestattava = 0;
         
+        // Suunnan apumuuttuja
         int suunta;
-
+        
+        // Koodia selkeyttävä apumuuttuja
         int absNopeus = xNopeus;
 
         if (xNopeus > 0) {
