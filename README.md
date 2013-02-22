@@ -3,9 +3,9 @@ Javalabra
 
 Käyttöohjeet:
 
-Tasohyppelypeli jossa ohjaat pientä neliskanttista sankaria tasosta toiseen. Nuolinäppäimet. Välilyönti.
+Tasohyppelypeli jossa ohjaat pientä neliskanttista sankaria tasosta toiseen. Nuolinäppäimet. Välilyönti. ESC quittaa.
 
-Alussa oikeanpuoleinen kuilu aloittaa uuden pelin, vasen jatkaa siitä mihin jäätiin. Tallennus tapahtuu automaagisesti.
+Alussa oikeanpuoleinen kuilu aloittaa uuden pelin, vasen jatkaa siitä mihin jäätiin. Tallennus tapahtuu automaagisesti kunkin tason jälkeen.
 
 
 
