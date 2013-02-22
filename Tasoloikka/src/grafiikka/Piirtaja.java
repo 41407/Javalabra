@@ -117,6 +117,7 @@ public class Piirtaja {
          * En nähnyt tarpeelliseksi generoida loputonta viivakenttää tässä
          * vaiheessa
          */
+        
         /**
          * Vaakaraita
          */

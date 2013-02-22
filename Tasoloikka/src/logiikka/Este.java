@@ -41,6 +41,7 @@ public class Este {
     public Este(int x0, int y0, int x1, int y1) {
         this.vasenYlakulma = new Piste(x0, y0);
         this.oikeaAlakulma = new Piste(x1, y1);
+        tarkistaPisteet();
     }
 
     /**
@@ -52,6 +53,7 @@ public class Este {
     public Este(Piste xy0, Piste xy1) {
         this.vasenYlakulma = xy0;
         this.oikeaAlakulma = xy1;
+        tarkistaPisteet();
     }
 
     /**
@@ -62,6 +64,7 @@ public class Este {
     public Este(ArrayList<Piste> pisteet) {
         this.vasenYlakulma = pisteet.get(0);
         this.oikeaAlakulma = pisteet.get(1);
+        tarkistaPisteet();
     }
 
     /**
@@ -112,5 +115,34 @@ public class Este {
                 + vasenYlakulma.getY() + " "
                 + oikeaAlakulma.getX() + " "
                 + oikeaAlakulma.getY() + "\n";
+    }
+
+    /**
+     * Metodi jonka tehtävänä on tarkistaa että vasen yläkulma on todellakin
+     * vasen yläkulma ja jne, jotta piirtäjä onnistuu piirtämisessä.
+     */
+    private void tarkistaPisteet() {
+        /**
+         * t niinku temporaalinen muuttuja
+         */
+        int x0, x1, y0, y1, t;
+        x0 = vasenYlakulma.getX();
+        y0 = vasenYlakulma.getY();
+        x1 = oikeaAlakulma.getX();
+        y1 = oikeaAlakulma.getY();
+
+        if (x1 < x0) {
+            t = x0;
+            x0 = x1;
+            x1 = t;
+        }
+        if (y1 < y0) {
+            t = y0;
+            y0 = y1;
+            y1 = t;
+        }
+        
+        this.vasenYlakulma = new Piste(x0, y0);
+        this.oikeaAlakulma = new Piste(x1, y1);
     }
 }

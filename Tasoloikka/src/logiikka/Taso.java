@@ -87,4 +87,16 @@ public class Taso {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        String s = "";
+        s += this.pelaajanAlkusijainti + "\n";
+        for (Este este : esteet) {
+            s += este.toString() + "\n";
+        }
+        return s;
+    }
+    
+    
 }

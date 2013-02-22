@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tasonLogiikkaTest;
+package logiikkaTest;
 
 import java.util.ArrayList;
 import org.junit.After;

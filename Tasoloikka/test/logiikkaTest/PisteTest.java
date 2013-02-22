@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tasonLogiikkaTest;
+package logiikkaTest;
 
 import logiikka.Piste;
 import logiikka.Este;

@@ -42,7 +42,9 @@ public class TasonLuonti {
      * tehdä.
      */
     private void teeTaso() {
+        int i = 1;
         for (String string : rivit) {
+            i++;
             char etumerkki = string.toUpperCase().charAt(0);
             if (etumerkki == 'E') {
                 esteRivi(string, EsteenTyyppi.ESTE);
@@ -55,8 +57,9 @@ public class TasonLuonti {
             } else if (etumerkki == 'X') {
                 esteRivi(string, EsteenTyyppi.SPECIAL);
             } else {
-                System.out.println("Tason luonnissa tiedostosta tapahtui virhe!");
-                return;
+                System.out.println("Tason luonnissa tiedostosta tapahtui"
+                        + " virhe rivillä " + i + ".\nRivin sisältö: '" 
+                        + string + "'");
             }
         }
     }
@@ -78,6 +81,9 @@ public class TasonLuonti {
      * @param string
      */
     private void pelaajaRivi(String string) {
+        if(string.charAt(1) != ' ') {
+            return;
+        }
         ArrayList<Integer> koordinaatit = stringKoordinaateiksi(string);
         ArrayList<Piste> pisteet = muutaPisteiksi(koordinaatit);
         taso.asetaPelaajanAlkusijainti(pisteet.get(0));

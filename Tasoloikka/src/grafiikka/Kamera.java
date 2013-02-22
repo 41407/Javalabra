@@ -20,6 +20,7 @@ public class Kamera extends Piste {
      * Kameran nopeus x-suunnassa (pikseliä/frame)
      */
     int xNopeus;
+    
     /**
      * Sama y-akselilla.
      */

@@ -61,7 +61,7 @@ public class Juoksu {
          * pelaajalle
          */
         try {
-            Tiedostonlukija lukija = new Tiedostonlukija("src/" + i + ".txt");
+            Tiedostonlukija lukija = new Tiedostonlukija("src/tasot/" + i + ".txt");
             TasonLuonti luonti = new TasonLuonti(lukija.getRivit());
             this.pelaaja.setTaso(luonti.getTaso());
         } catch (Exception ex) {
@@ -69,7 +69,7 @@ public class Juoksu {
              * Jos tasot loppuvat, gg.txt :D
              */
             try {
-                Tiedostonlukija lukija = new Tiedostonlukija("src/gg.txt");
+                Tiedostonlukija lukija = new Tiedostonlukija("src/tasot/gg.txt");
                 TasonLuonti luonti = new TasonLuonti(lukija.getRivit());
                 this.pelaaja.setTaso(luonti.getTaso());
             } catch (Exception ex1) {
@@ -170,7 +170,7 @@ public class Juoksu {
 
     private int lataaPelaajanTallennustiedosto() {
         try {
-            Tiedostonlukija lukija = new Tiedostonlukija("src/save.txt");
+            Tiedostonlukija lukija = new Tiedostonlukija("src/tasot/save.txt");
             TallennuksenKasittelija kasittelija = new TallennuksenKasittelija();
             return kasittelija.etsiTasonNumero(lukija.getRivit());
         } catch (Exception ex) {
@@ -185,7 +185,7 @@ public class Juoksu {
             TallennuksenKasittelija kasittelija =
                     new TallennuksenKasittelija(tasonNumero);
             kirjoittaja.kirjoitaTiedosto(
-                    "src/save.txt",
+                    "src/tasot/save.txt",
                     kasittelija.toString(),
                     true);
         } catch (Exception ex1) {

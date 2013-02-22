@@ -5,6 +5,7 @@
 package grafiikka;
 
 /**
+ * Jpaneeli jolle piirtaja piirtaa
  * 
  * @author jiji
  */

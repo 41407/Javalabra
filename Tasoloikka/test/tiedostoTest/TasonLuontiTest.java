@@ -5,6 +5,7 @@
 package tiedostoTest;
 
 import java.util.ArrayList;
+import logiikka.Este;
 import logiikka.EsteenTyyppi;
 import logiikka.Piste;
 import logiikka.Taso;
@@ -59,14 +60,42 @@ public class TasonLuontiTest {
                 && t.getPelaajanAlkusijainti().getY() == 0);
     }
 
-/*    @Test
+    @Test
     public void PelaajanAlkusijaintiKunOnKerrottu() {
-        this.r.add("P 20 20");
-        assertTrue("Pelaajan alkusijainti oli väärä",
-                t.getPelaajanAlkusijainti().getX() == 0
-                && t.getPelaajanAlkusijainti().getY() == 0);
+        ArrayList<String> rivit = new ArrayList();
+        rivit.add("P 20 20");
+        TasonLuonti tl = new TasonLuonti(rivit);
+        Taso ta = tl.getTaso();
+        assertTrue("Pelaajan alkusijainti oli väärä"
+                + ta.getPelaajanAlkusijainti().toString(),
+                ta.getPelaajanAlkusijainti().getX() == 20
+                && ta.getPelaajanAlkusijainti().getY() == 20);
     }
-*/
+
+    @Test
+    public void PelaajanAlkusijaintiKunVirheellinenRivi() {
+        ArrayList<String> rivit = new ArrayList();
+        rivit.add("P2klrejteagasd");
+        TasonLuonti tl = new TasonLuonti(rivit);
+        Taso ta = tl.getTaso();
+        assertTrue("Pelaajan alkusijainti oli väärä"
+                + ta.getPelaajanAlkusijainti().toString(),
+                ta.getPelaajanAlkusijainti().getX() == 0
+                && ta.getPelaajanAlkusijainti().getY() == 0);
+    }
+
+    @Test
+    public void esteenTarkkaSijainti() {
+        ArrayList<String> rivit = new ArrayList();
+        rivit.add("E 100 100 200 200");
+        Este e = new Este(100, 100 ,200, 200);
+        Piste p = new Piste();
+        TasonLuonti tl = new TasonLuonti(rivit);
+        Taso ta = tl.getTaso();
+        assertTrue("Esteitä oli väärissä paikoissa " + ta.toString(), 
+                ta.toString().equals(p.toString() + "\n" + e.toString()+"\n"));
+    }
+
     @Test
     public void NormiEste() {
         assertTrue("Este ei ollut oikeassa paikassa",
